@@ -9,3 +9,9 @@ class Point {
     self.y = y
   }
 }
+
+extension Point: Equatable {
+  static func ==(lhs: Point, rhs: Point) -> Bool {
+    return lhs.x == rhs.x && lhs.y == rhs.y
+  }
+}

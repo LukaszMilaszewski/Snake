@@ -38,8 +38,29 @@ class Snake {
     body.append(Point(x: newHeadX, y: newHeadY))
   }
   
+  func isSelfCollision() -> Bool {
+    for i in body.indices.dropLast() {
+      if body[i] == body.last {
+        return true
+      }
+    }
+    return false
+  }
+  
   func removeTail() {
     body.removeFirst()
+  }
+  
+  func getHead() -> Point {
+    return body.last!
+  }
+  
+  func getHeadX() -> Int {
+    return getHead().x
+  }
+  
+  func getHeadY() -> Int {
+    return getHead().y
   }
   
   func makeMove() {

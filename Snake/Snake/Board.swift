@@ -27,7 +27,15 @@ class Board {
     scene = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
   }
   
-  func updateScene(snake:Snake) {
+  func isWallCollision(snake: Snake) -> Bool {
+    return snake.getHeadX() < 0 || snake.getHeadY() < 0 ? true : false
+  }
+  
+  func checkColision(snake: Snake) -> Bool {
+    return snake.isSelfCollision() || isWallCollision(snake: snake)
+  }
+  
+  func updateScene(snake: Snake) {
     clearScene()
     for point in snake.body {
       scene[point.y][point.x] = 1
