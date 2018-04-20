@@ -1,16 +1,24 @@
 import UIKit
+
 class GameViewController: UIViewController {
   
   var timer:Timer?
-  var snake = Snake(length: 5)
+  var snake = Snake()
   var board = Board()
+  var apple: Apple?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
-    board.updateScene(snake: snake)
-    board.printScene()
+    
+    addApple()
+    board.updateBoard(snake: snake, apple: apple!)
+    board.printBoard()
     self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
+  }
+  
+  func addApple() {
+    apple = Apple(boardWidth: board.width, boardHeight: board.height)
   }
   
   func showAlert() {
@@ -28,8 +36,8 @@ class GameViewController: UIViewController {
       return
     }
     
-    board.updateScene(snake: snake)
-    board.printScene()
+    board.updateBoard(snake: snake, apple: apple!)
+    board.printBoard()
   }
   
   func addSwipe() {

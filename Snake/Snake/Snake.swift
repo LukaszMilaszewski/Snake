@@ -1,5 +1,3 @@
-import UIKit
-
 enum Direction {
   case north
   case south

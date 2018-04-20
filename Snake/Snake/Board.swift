@@ -1,7 +1,5 @@
-import UIKit
-
 class Board {
-  var scene = [[Int]]()
+  var  board = [[Int]]()
   let width:Int
   let height:Int
   
@@ -9,36 +7,48 @@ class Board {
     self.width = width
     self.height = height
     
-    self.clearScene()
+    self.clearBoard()
   }
   
-  func printScene() {
-    for i in 0..<scene.count {
+  func printBoard() {
+    for i in 0..<board.count {
       var line = ""
-      for j in 0..<scene[i].count {
-        line += String(scene[i][j])
+      for j in 0..<board[i].count {
+        line += String(board[i][j])
         line += " "
       }
       print(line)
     }
   }
   
-  func clearScene() {
-    scene = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
+  func clearBoard() {
+    board = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
   }
   
   func isWallCollision(snake: Snake) -> Bool {
-    return snake.getHeadX() < 0 || snake.getHeadY() < 0 ? true : false
+    let x = snake.getHeadX()
+    let y = snake.getHeadY()
+    
+    return x < 0 || x >= width || y < 0 || y >= height ? true : false
   }
   
   func checkColision(snake: Snake) -> Bool {
     return snake.isSelfCollision() || isWallCollision(snake: snake)
   }
   
-  func updateScene(snake: Snake) {
-    clearScene()
+  func showSnake(snake: Snake) {
     for point in snake.body {
-      scene[point.y][point.x] = 1
+      board[point.y][point.x] = 1
     }
+  }
+  
+  func showApple(apple: Apple) {
+    board[apple.y][apple.x] = 5
+  }
+  
+  func updateBoard(snake: Snake, apple: Apple) {
+    clearBoard()
+    showApple(apple: apple)
+    showSnake(snake: snake)
   }
 }
