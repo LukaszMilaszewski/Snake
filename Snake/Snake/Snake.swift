@@ -11,7 +11,6 @@ class Snake {
   var body = [Point]()
   var direction = Direction.south
   init (length:Int = Constants.snakeLength) {
-    
     for i in 0..<length {
       body.append(Point(x: 0, y: i))
     }
