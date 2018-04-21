@@ -6,22 +6,41 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   var squares: [[CAShapeLayer]]?
   var width: Int?
   var height: Int?
+  var offsetX: Int?
+  var offsetY: Int?
+  
+  override var prefersStatusBarHidden: Bool {
+    return true
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
-    width = Int(Int(view.bounds.width) / Int(Constants.squareDimension))
-    height = Int(Int(view.bounds.height) / Int(Constants.squareDimension))
-    
+    setupDimensions()
+    setupView()
+    startGame()
+  }
+  
+  func startGame() {
     gameHandler = GameHandler(boardWidth: width!, boardHeight: height!,
                               snakeLength: Constants.snakeLength)
     
-    squares = [[CAShapeLayer]](repeating: [CAShapeLayer](repeating: CAShapeLayer(), count: gameHandler!.board!.getWidth()), count: gameHandler!.board!.getHeight())
-    
     gameHandler!.delegate = self
+    gameHandler!.startGame()
   }
   
+  func setupView() {
+    view.backgroundColor = UIColor.blue
+    squares = [[CAShapeLayer]](repeating: [CAShapeLayer](repeating: CAShapeLayer(), count: width!),
+                               count: height!)
+  }
   
+  func setupDimensions() {
+    width = Int(Int(view.bounds.width) / Int(Constants.squareDimension))
+    height = Int(Int(view.bounds.height) / Int(Constants.squareDimension))
+    offsetX = Int(view.bounds.width) - width!
+    offsetY = Int(view.bounds.height) - height!
+  }
   
   func showAlert() {
     print("------")
@@ -62,7 +81,7 @@ class GameViewController: UIViewController, GameHandlerDelegate {
     showAlert()
   }
   
-  func updatedBoard(board: Board) {
+  func updateBoard(board: Board) {
     board.printBoard()
     
     for i in 0..<board.getHeight() {

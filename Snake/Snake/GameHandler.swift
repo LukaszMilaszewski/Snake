@@ -2,11 +2,10 @@ import Foundation
 
 protocol GameHandlerDelegate: class {
   func collision()
-  func updatedBoard(board: Board)
+  func updateBoard(board: Board)
 }
 
 class GameHandler {
- 
   var delegate: GameHandlerDelegate?
   var timer: Timer?
   var snake: Snake?
@@ -16,8 +15,11 @@ class GameHandler {
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
     board = Board(width: boardWidth, height: boardHeight)
     snake = Snake(length: snakeLength)
-    self.timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
+  }
+  
+  func startGame() {
     setInitialBoard()
+    self.timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
   }
   
   func setSnakeDirection(direction: Direction) {
@@ -28,6 +30,7 @@ class GameHandler {
     generateApple()
     board!.updateBoard(snake: snake!, apple: apple!)
     board!.printBoard()
+    delegate?.updateBoard(board: board!)
   }
   
   func generateApple() {
@@ -59,6 +62,6 @@ class GameHandler {
     }
     
     board!.updateBoard(snake: snake!, apple: apple!)
-    delegate?.updatedBoard(board: board!)
+    delegate?.updateBoard(board: board!)
   }
 }
