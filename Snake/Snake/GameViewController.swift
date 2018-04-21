@@ -11,20 +11,29 @@ class GameViewController: UIViewController {
     super.viewDidLoad()
     addSwipe()
     
-    addApple()
+    generateApple()
     board.updateBoard(snake: snake, apple: apple!)
     board.printBoard()
     self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
   }
   
-  func addApple() {
-    apple = Apple(boardWidth: board.width, boardHeight: board.height)
+  func generateApple() {
+     apple = Apple(boardWidth: board.width, boardHeight: board.height)
+  }
+  
+  func updateApple() {
+    board.removeApple(apple: apple!)
+    generateApple()
   }
   
   func showAlert() {
     print("------")
     print("GAME OVER!")
     print("------")
+  }
+  
+  func isAppleGained() -> Bool {
+    return snake.getHead() == apple ? true : false
   }
   
   @objc func timerMethod(_ timer:Timer) {
@@ -34,6 +43,11 @@ class GameViewController: UIViewController {
       showAlert()
       timer.invalidate()
       return
+    }
+    
+    if isAppleGained() {
+      updateApple()
+      snake.isAppleGained = true
     }
     
     board.updateBoard(snake: snake, apple: apple!)

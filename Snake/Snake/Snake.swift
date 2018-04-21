@@ -8,6 +8,8 @@ enum Direction {
 class Snake {
   var body = [Point]()
   var direction = Direction.south
+  var isAppleGained = false
+  
   init (length:Int = Constants.snakeLength) {
     for i in 0..<length {
       body.append(Point(x: 0, y: i))
@@ -46,6 +48,10 @@ class Snake {
   }
   
   func removeTail() {
+    if isAppleGained {
+      isAppleGained = false
+      return
+    }
     body.removeFirst()
   }
   

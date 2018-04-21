@@ -36,19 +36,23 @@ class Board {
     return snake.isSelfCollision() || isWallCollision(snake: snake)
   }
   
-  func showSnake(snake: Snake) {
+  func addSnake(snake: Snake) {
     for point in snake.body {
       board[point.y][point.x] = 1
     }
   }
   
-  func showApple(apple: Apple) {
+  func addApple(apple: Apple) {
     board[apple.y][apple.x] = 5
+  }
+  
+  func removeApple(apple: Apple) {
+    board[apple.y][apple.x] = 0
   }
   
   func updateBoard(snake: Snake, apple: Apple) {
     clearBoard()
-    showApple(apple: apple)
-    showSnake(snake: snake)
+    addApple(apple: apple)
+    addSnake(snake: snake)
   }
 }

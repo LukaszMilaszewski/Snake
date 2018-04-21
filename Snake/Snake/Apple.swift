@@ -9,6 +9,5 @@ class Apple: Point {
     self.imagePath = imagePath
     
     super.init(x: x, y: y)
-    
   }
 }
