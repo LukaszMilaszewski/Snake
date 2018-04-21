@@ -16,7 +16,7 @@ class GameHandler {
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
     board = Board(width: boardWidth, height: boardHeight)
     snake = Snake(length: snakeLength)
-    self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
+    self.timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
     setInitialBoard()
   }
   

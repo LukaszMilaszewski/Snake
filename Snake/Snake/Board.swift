@@ -1,7 +1,7 @@
 class Board {
   var  board: [[Int]]
 
-  init(width: Int = Constants.boardWidth, height: Int = Constants.boardHeight) {
+  init(width: Int, height: Int) {
     
     board = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
     clearBoard()
@@ -13,6 +13,10 @@ class Board {
   
   func getWidth() -> Int {
     return board[0].count
+  }
+  
+  func getElement(x: Int, y: Int) -> Int {
+    return board[x][y]
   }
   
   func printBoard() {

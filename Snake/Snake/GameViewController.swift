@@ -3,15 +3,25 @@ import UIKit
 class GameViewController: UIViewController, GameHandlerDelegate {
   
   var gameHandler: GameHandler?
-  var squares = [[CAShapeLayer]]()
+  var squares: [[CAShapeLayer]]?
+  var width: Int?
+  var height: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
-    gameHandler = GameHandler(boardWidth: Constants.boardWidth, boardHeight: Constants.boardHeight,
+    width = Int(Int(view.bounds.width) / Int(Constants.squareDimension))
+    height = Int(Int(view.bounds.height) / Int(Constants.squareDimension))
+    
+    gameHandler = GameHandler(boardWidth: width!, boardHeight: height!,
                               snakeLength: Constants.snakeLength)
+    
+    squares = [[CAShapeLayer]](repeating: [CAShapeLayer](repeating: CAShapeLayer(), count: gameHandler!.board!.getWidth()), count: gameHandler!.board!.getHeight())
+    
     gameHandler!.delegate = self
   }
+  
+  
   
   func showAlert() {
     print("------")
@@ -54,5 +64,36 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   
   func updatedBoard(board: Board) {
     board.printBoard()
+    
+    for i in 0..<board.getHeight() {
+      for j in 0..<board.getWidth() {
+        squares![i][j] = getLayer(x: j * Constants.squareDimension, y: i * Constants.squareDimension, value: board.getElement(x: i, y: j))
+      }
+    }
+    view.layer.sublayers?.removeAll()
+    for i in 0..<squares!.count {
+      for j in 0..<squares![i].count {
+        view.layer.addSublayer(squares![i][j])
+      }
+    }
+  }
+  
+  func getLayer(x: Int, y: Int, value: Int) -> CAShapeLayer {
+    let layer = CAShapeLayer()
+    let element = CGRect(x: x, y: y, width: Constants.squareDimension, height: Constants.squareDimension)
+    layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
+    
+    switch value {
+    case 0:
+      layer.fillColor = UIColor.gray.cgColor
+    case 1:
+      layer.fillColor = UIColor.black.cgColor
+    case 5:
+      layer.fillColor = UIColor.red.cgColor
+    default:
+      print("cannot happen")
+    }
+    
+    return layer
   }
 }
