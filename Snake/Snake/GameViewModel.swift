@@ -1,15 +1,32 @@
 import UIKit
 
+protocol GameViewModelDelegate: class {
+  func restartButtonPressed()
+  func presentAlert(alert: UIAlertController)
+}
+
 class GameViewModel {
   var view: UIView
-  var squares: [[CAShapeLayer]]?
-  var offsetX: Int?
-  var offsetY: Int?
+  var squares: [[CAShapeLayer]]
+
+  var width: Int
+  var height: Int
+  var offsetX: Int
+  var offsetY: Int
   
-  init(view: UIView, color: UIColor, width: Int, height: Int, offsetX: Int, offsetY: Int) {
+  var delegate: GameViewModelDelegate?
+  
+  init(view: UIView, color: UIColor) {
     self.view = view
-    self.offsetX = offsetX
-    self.offsetY = offsetY
+    let screenWidth = Int(view.bounds.width)
+    let screenHeight = Int(view.bounds.height)
+    
+    width = Int(screenWidth / Constants.squareDimension)
+    height = Int(screenHeight / Constants.squareDimension)
+    
+    offsetX = (screenWidth - width * Constants.squareDimension) / 2
+    offsetY = (screenHeight - height * Constants.squareDimension) / 2
+    
     view.backgroundColor = color
     squares = [[CAShapeLayer]](repeating: [CAShapeLayer](repeating: CAShapeLayer(), count: width),
                                count: height)
@@ -18,13 +35,13 @@ class GameViewModel {
   func temp(board: Board) {
     for i in 0..<board.getHeight() {
       for j in 0..<board.getWidth() {
-        squares![i][j] = getLayer(x: offsetX! + j * Constants.squareDimension, y: offsetY! + i * Constants.squareDimension, value: board.getElement(x: i, y: j))
+        squares[i][j] = getLayer(x: offsetX + j * Constants.squareDimension, y: offsetY + i * Constants.squareDimension, value: board.getElement(x: i, y: j))
       }
     }
     view.layer.sublayers?.removeAll()
-    for i in 0..<squares!.count {
-      for j in 0..<squares![i].count {
-        view.layer.addSublayer(squares![i][j])
+    for i in 0..<squares.count {
+      for j in 0..<squares[i].count {
+        view.layer.addSublayer(squares[i][j])
       }
     }
   }
@@ -46,5 +63,13 @@ class GameViewModel {
     }
     
     return layer
+  }
+  
+  func showAlert() {
+    let alert = UIAlertController(title: "GAME OVER!", message: "Game Over.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { _ in
+      self.delegate?.restartButtonPressed()
+    }))
+    delegate?.presentAlert(alert: alert)
   }
 }

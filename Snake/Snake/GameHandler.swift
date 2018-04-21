@@ -31,7 +31,6 @@ class GameHandler {
   func setInitialBoard() {
     generateApple()
     board!.updateBoard(snake: snake!, apple: apple!)
-    board!.printBoard()
     delegate?.updateBoard(board: board!)
   }
   
