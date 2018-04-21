@@ -3,7 +3,9 @@ import UIKit
 class GameViewController: UIViewController, GameHandlerDelegate {
   
   var gameHandler: GameHandler?
-  var squares: [[CAShapeLayer]]?
+  var gameViewModel: GameViewModel?
+  
+
   var width: Int?
   var height: Int?
   var offsetX: Int?
@@ -16,7 +18,6 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
-    setupDimensions()
     setupView()
     startGame()
   }
@@ -30,9 +31,10 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   }
   
   func setupView() {
+    setupDimensions()
     view.backgroundColor = UIColor.gray
-    squares = [[CAShapeLayer]](repeating: [CAShapeLayer](repeating: CAShapeLayer(), count: width!),
-                               count: height!)
+    gameViewModel = GameViewModel(view: self.view, color: UIColor.green, width: width!, height: height!, offsetX: offsetX!, offsetY: offsetY!)
+
   }
   
   func setupDimensions() {
@@ -86,37 +88,6 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   }
   
   func updateBoard(board: Board) {
-    board.printBoard()
-    
-    for i in 0..<board.getHeight() {
-      for j in 0..<board.getWidth() {
-        squares![i][j] = getLayer(x: offsetX! + j * Constants.squareDimension, y: offsetY! + i * Constants.squareDimension, value: board.getElement(x: i, y: j))
-      }
-    }
-    view.layer.sublayers?.removeAll()
-    for i in 0..<squares!.count {
-      for j in 0..<squares![i].count {
-        view.layer.addSublayer(squares![i][j])
-      }
-    }
-  }
-  
-  func getLayer(x: Int, y: Int, value: Int) -> CAShapeLayer {
-    let layer = CAShapeLayer()
-    let element = CGRect(x: x, y: y, width: Constants.squareDimension, height: Constants.squareDimension)
-    layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
-    
-    switch value {
-    case 0:
-      layer.fillColor = UIColor.white.cgColor
-    case 1:
-      layer.fillColor = UIColor.black.cgColor
-    case 5:
-      layer.fillColor = UIColor.red.cgColor
-    default:
-      print("cannot happen")
-    }
-    
-    return layer
+    gameViewModel!.temp(board: board)
   }
 }
