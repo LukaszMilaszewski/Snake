@@ -2,18 +2,26 @@ import UIKit
 
 class GameViewController: UIViewController, GameHandlerDelegate {
   
-  let gameHandler = GameHandler()
+  var gameHandler: GameHandler?
+  var squares = [[CAShapeLayer]]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
-    gameHandler.delegate = self
+    gameHandler = GameHandler(boardWidth: Constants.boardWidth, boardHeight: Constants.boardHeight,
+                              snakeLength: Constants.snakeLength)
+    gameHandler!.delegate = self
   }
   
   func showAlert() {
     print("------")
     print("GAME OVER!")
     print("------")
+    let alert = UIAlertController(title: "GAME OVER!", message: "Game Over.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { _ in
+              self.viewDidLoad()
+            }))
+            self.present(alert, animated: true)
   }
   
   func addSwipe() {
@@ -28,13 +36,13 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
     switch sender.direction {
     case UISwipeGestureRecognizerDirection.up:
-      gameHandler.setSnakeDirection(direction: Direction.north)
+      gameHandler!.setSnakeDirection(direction: Direction.north)
     case UISwipeGestureRecognizerDirection.down:
-      gameHandler.setSnakeDirection(direction: Direction.south)
+      gameHandler!.setSnakeDirection(direction: Direction.south)
     case UISwipeGestureRecognizerDirection.left:
-      gameHandler.setSnakeDirection(direction: Direction.west)
+      gameHandler!.setSnakeDirection(direction: Direction.west)
     case UISwipeGestureRecognizerDirection.right:
-      gameHandler.setSnakeDirection(direction: Direction.east)
+      gameHandler!.setSnakeDirection(direction: Direction.east)
     default:
       assert(false, "Cannot handle direction.")
     }

@@ -1,13 +1,18 @@
 class Board {
-  var  board = [[Int]]()
-  let width:Int
-  let height:Int
-  
+  var  board: [[Int]]
+
   init(width: Int = Constants.boardWidth, height: Int = Constants.boardHeight) {
-    self.width = width
-    self.height = height
     
-    self.clearBoard()
+    board = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
+    clearBoard()
+  }
+  
+  func getHeight() -> Int {
+    return board.count
+  }
+  
+  func getWidth() -> Int {
+    return board[0].count
   }
   
   func printBoard() {
@@ -22,14 +27,14 @@ class Board {
   }
   
   func clearBoard() {
-    board = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
+    board = [[Int]](repeating: [Int](repeating: 0, count: getWidth()), count: getHeight())
   }
   
   func isWallCollision(snake: Snake) -> Bool {
     let x = snake.getHeadX()
     let y = snake.getHeadY()
     
-    return x < 0 || x >= width || y < 0 || y >= height ? true : false
+    return x < 0 || x >= getWidth() || y < 0 || y >= getHeight() ? true : false
   }
   
   func checkColision(snake: Snake) -> Bool {
