@@ -23,7 +23,9 @@ class GameHandler {
   }
   
   func setSnakeDirection(direction: Direction) {
-    snake!.direction = direction
+    if snake!.isDirectionPossible(direction: direction) {
+      snake!.direction = direction
+    }
   }
   
   func setInitialBoard() {

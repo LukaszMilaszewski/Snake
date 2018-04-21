@@ -47,6 +47,15 @@ class Snake {
     return false
   }
   
+  func isDirectionPossible(direction: Direction) -> Bool {
+    if direction == Direction.north && self.direction == Direction.south {return false}
+    if direction == Direction.south && self.direction == Direction.north {return false}
+    if direction == Direction.east && self.direction == Direction.west {return false}
+    if direction == Direction.west && self.direction == Direction.east {return false}
+    
+    return true
+  }
+  
   func removeTail() {
     if isAppleGained {
       isAppleGained = false
