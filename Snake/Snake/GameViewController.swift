@@ -30,16 +30,20 @@ class GameViewController: UIViewController, GameHandlerDelegate {
   }
   
   func setupView() {
-    view.backgroundColor = UIColor.blue
+    view.backgroundColor = UIColor.gray
     squares = [[CAShapeLayer]](repeating: [CAShapeLayer](repeating: CAShapeLayer(), count: width!),
                                count: height!)
   }
   
   func setupDimensions() {
-    width = Int(Int(view.bounds.width) / Int(Constants.squareDimension))
-    height = Int(Int(view.bounds.height) / Int(Constants.squareDimension))
-    offsetX = Int(view.bounds.width) - width!
-    offsetY = Int(view.bounds.height) - height!
+    let screenWidth = Int(view.bounds.width)
+    let screenHeight = Int(view.bounds.height)
+    
+    width = Int(screenWidth / Constants.squareDimension)
+    height = Int(screenHeight / Constants.squareDimension)
+    
+    offsetX = (screenWidth - width! * Constants.squareDimension) / 2
+    offsetY = (screenHeight - height! * Constants.squareDimension) / 2
   }
   
   func showAlert() {
@@ -86,7 +90,7 @@ class GameViewController: UIViewController, GameHandlerDelegate {
     
     for i in 0..<board.getHeight() {
       for j in 0..<board.getWidth() {
-        squares![i][j] = getLayer(x: j * Constants.squareDimension, y: i * Constants.squareDimension, value: board.getElement(x: i, y: j))
+        squares![i][j] = getLayer(x: offsetX! + j * Constants.squareDimension, y: offsetY! + i * Constants.squareDimension, value: board.getElement(x: i, y: j))
       }
     }
     view.layer.sublayers?.removeAll()
@@ -104,7 +108,7 @@ class GameViewController: UIViewController, GameHandlerDelegate {
     
     switch value {
     case 0:
-      layer.fillColor = UIColor.gray.cgColor
+      layer.fillColor = UIColor.white.cgColor
     case 1:
       layer.fillColor = UIColor.black.cgColor
     case 5:

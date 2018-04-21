@@ -19,7 +19,7 @@ class GameHandler {
   
   func startGame() {
     setInitialBoard()
-    self.timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
+    self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
   }
   
   func setSnakeDirection(direction: Direction) {
