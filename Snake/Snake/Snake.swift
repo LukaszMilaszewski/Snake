@@ -1,58 +1,33 @@
-enum Direction {
-  case Up
-  case Down
-  case Right
-  case Left
-}
-
 class Snake {
-  var body = [Point]()
-  var direction = Direction.Down
+  var body: [Point]
+  var direction: Direction
   var shouldGrow = false
   
-  init (length:Int = Constants.snakeLength) {
+  init (length:Int = Constants.snakeLength, initialDirection: Direction = Constants.snakeDirection) {
+    direction = initialDirection
+    
+    body = [Point]()
     for i in 0..<length {
       body.append(Point(x: 0, y: i))
     }
   }
   
-  func addHead() {
-    let previousHead = body.last
-    var offsetX = 0
-    var offsetY = 0
-    
-    switch direction {
-    case .Up:
-      offsetY = -1
-    case .Right:
-      offsetX = 1
-    case .Down:
-      offsetY = 1
-    case .Left:
-      offsetX = -1
-    }
-    
-    let newHeadX = (previousHead?.x)! + offsetX
-    let newHeadY = (previousHead?.y)! + offsetY
-    
-    body.append(Point(x: newHeadX, y: newHeadY))
-  }
-  
   func isDirectionPossible(direction: Direction) -> Bool {
-    if direction == Direction.Up && self.direction == Direction.Down {return false}
-    if direction == Direction.Down && self.direction == Direction.Up {return false}
-    if direction == Direction.Right && self.direction == Direction.Left {return false}
-    if direction == Direction.Left && self.direction == Direction.Right {return false}
+    if direction == Direction.up && self.direction == Direction.down {return false}
+    if direction == Direction.down && self.direction == Direction.up {return false}
+    if direction == Direction.right && self.direction == Direction.left {return false}
+    if direction == Direction.left && self.direction == Direction.right {return false}
     
     return true
   }
   
-  func removeTail() {
-    if shouldGrow {
-      shouldGrow = false
-      return
+  func isSelfCollision() -> Bool {
+    for i in body.indices.dropLast() {
+      if body[i] == body.last {
+        return true
+      }
     }
-    body.removeFirst()
+    return false
   }
   
   func getHead() -> Point {
@@ -70,5 +45,35 @@ class Snake {
   func makeMove() {
     removeTail()
     addHead()
+  }
+  
+  func removeTail() {
+    if shouldGrow {
+      shouldGrow = false
+      return
+    }
+    body.removeFirst()
+  }
+  
+  func addHead() {
+    let previousHead = body.last
+    var offsetX = 0
+    var offsetY = 0
+    
+    switch direction {
+    case .up:
+      offsetY = -1
+    case .right:
+      offsetX = 1
+    case .down:
+      offsetY = 1
+    case .left:
+      offsetX = -1
+    }
+    
+    let newHeadX = (previousHead?.x)! + offsetX
+    let newHeadY = (previousHead?.y)! + offsetY
+    
+    body.append(Point(x: newHeadX, y: newHeadY))
   }
 }

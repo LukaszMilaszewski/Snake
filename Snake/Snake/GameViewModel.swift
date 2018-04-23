@@ -32,10 +32,12 @@ class GameViewModel {
                                count: height)
   }
   
-  func temp(board: Board) {
+  func showView(board: Board) {
     for i in 0..<board.getHeight() {
       for j in 0..<board.getWidth() {
-        squares[i][j] = getLayer(x: offsetX + j * Constants.squareDimension, y: offsetY + i * Constants.squareDimension, value: board.getElement(x: i, y: j))
+        squares[i][j] = getLayer(x: offsetX + j * Constants.squareDimension,
+                                 y: offsetY + i * Constants.squareDimension,
+                                 value: board.getElement(x: i, y: j))
       }
     }
     view.layer.sublayers?.removeAll()

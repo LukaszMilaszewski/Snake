@@ -12,6 +12,37 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     startGame()
   }
   
+  func addSwipe() {
+    let directions: [UISwipeGestureRecognizerDirection] = [.right, .left, .up, .down]
+    for direction in directions {
+      let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+      gesture.direction = direction
+      self.view.addGestureRecognizer(gesture)
+    }
+  }
+  
+  @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+    switch sender.direction {
+    case UISwipeGestureRecognizerDirection.up:
+      gameHandler!.setSnakeDirection(direction: Direction.up)
+    case UISwipeGestureRecognizerDirection.down:
+      gameHandler!.setSnakeDirection(direction: Direction.down)
+    case UISwipeGestureRecognizerDirection.left:
+      gameHandler!.setSnakeDirection(direction: Direction.left)
+    case UISwipeGestureRecognizerDirection.right:
+      gameHandler!.setSnakeDirection(direction: Direction.right)
+    default:
+      assert(false, "Cannot handle direction.")
+    }
+  }
+  
+  func setupView() {
+    view.backgroundColor = UIColor.gray
+    gameViewModel = GameViewModel(view: self.view,
+                                  color: Constants.backgroundColor)
+    gameViewModel?.delegate = self
+  }
+  
   func startGame() {
     let width = Int(Int(view.bounds.width) / Constants.squareDimension)
     let height = Int(Int(view.bounds.height) / Constants.squareDimension)
@@ -24,44 +55,13 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     gameHandler!.startGame()
   }
   
-  func setupView() {
-    view.backgroundColor = UIColor.gray
-    gameViewModel = GameViewModel(view: self.view,
-                                  color: Constants.backgroundColor)
-    gameViewModel?.delegate = self
-  }
-  
-  func addSwipe() {
-    let directions: [UISwipeGestureRecognizerDirection] = [.right, .left, .up, .down]
-    for direction in directions {
-      let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-      gesture.direction = direction
-      self.view.addGestureRecognizer(gesture)
-    }
-  }
-
-  @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
-    switch sender.direction {
-    case UISwipeGestureRecognizerDirection.up:
-      gameHandler!.setSnakeDirection(direction: Direction.Up)
-    case UISwipeGestureRecognizerDirection.down:
-      gameHandler!.setSnakeDirection(direction: Direction.Down)
-    case UISwipeGestureRecognizerDirection.left:
-      gameHandler!.setSnakeDirection(direction: Direction.Left)
-    case UISwipeGestureRecognizerDirection.right:
-      gameHandler!.setSnakeDirection(direction: Direction.Right)
-    default:
-      assert(false, "Cannot handle direction.")
-    }
-  }
-  
   //MARK: - GameHandlerDelegate
   func collision() {
-    gameViewModel!.showAlert()
+    gameViewModel?.showAlert()
   }
   
   func updateBoard(board: Board) {
-    gameViewModel!.temp(board: board)
+    gameViewModel?.showView(board: board)
   }
   
   //MARK: - GameViewModelDelegate

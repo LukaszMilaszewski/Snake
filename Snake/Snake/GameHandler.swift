@@ -6,11 +6,14 @@ protocol GameHandlerDelegate: class {
 }
 
 class GameHandler {
-  var delegate: GameHandlerDelegate?
-  var timer: Timer?
   var snake: Snake
   var board: Board
   var apple: Apple
+  
+  var timer: Timer?
+  var gameSpeed: Speed?
+  
+  var delegate: GameHandlerDelegate?
   
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
     board = Board(width: boardWidth, height: boardHeight)
@@ -18,15 +21,9 @@ class GameHandler {
     apple = Apple(xMax: boardWidth, yMax: boardHeight)
   }
   
-  func startGame() {
+  func startGame(gameSpeed: Speed = Constants.initialGameSpeed) {
     setInitialBoard()
-    self.timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(self.timerMethod(_:)), userInfo: nil, repeats: true)
-  }
-  
-  func setSnakeDirection(direction: Direction) {
-    if snake.isDirectionPossible(direction: direction) {
-      snake.direction = direction
-    }
+    setTimer(speed: gameSpeed)
   }
   
   func setInitialBoard() {
@@ -35,10 +32,44 @@ class GameHandler {
     delegate?.updateBoard(board: board)
   }
   
+  func setTimer(speed: Speed) {
+    
+    var timeInterval: Double
+    
+    switch speed {
+    case .slow:
+      timeInterval = 0.5
+    case .medium:
+      timeInterval = 0.2
+    case .fast:
+      timeInterval = 0.1
+    }
+    
+    self.timer = Timer.scheduledTimer(timeInterval: timeInterval,
+                                      target: self,
+                                      selector: #selector(self.timerMethod(_:)),
+                                      userInfo: nil,
+                                      repeats: true)
+  }
+  
   func addSnake() {
     for point in snake.body {
       board.setElement(x: point.x, y: point.y, value: 1)
     }
+  }
+  
+  func addApple() {
+    board.setElement(x: apple.x, y: apple.y, value: 5)
+  }
+  
+  func setSnakeDirection(direction: Direction) {
+    if snake.isDirectionPossible(direction: direction) {
+      snake.direction = direction
+    }
+  }
+  
+  func checkColision() -> Bool {
+    return snake.isSelfCollision() || isWallCollision()
   }
   
   func isWallCollision() -> Bool {
@@ -46,31 +77,6 @@ class GameHandler {
     let y = snake.getHeadY()
     
     return x < 0 || x >= board.getWidth() || y < 0 || y >= board.getHeight()
-  }
-  
-  func isSelfCollision() -> Bool {
-    for i in snake.body.indices.dropLast() {
-      if snake.body[i] == snake.body.last {
-        return true
-      }
-    }
-    return false
-  }
-  
-  func checkColision() -> Bool {
-    return isSelfCollision() || isWallCollision()
-  }
-  
-  func addApple() {
-    board.setElement(x: apple.x, y: apple.y, value: 5)
-  }
-  
-  func updateApple() {
-    apple.setRandomPosition()
-  }
-  
-  func isAppleCollected() -> Bool {
-    return snake.getHead() == apple
   }
   
   @objc func timerMethod(_ timer:Timer) {
@@ -90,6 +96,14 @@ class GameHandler {
     
     updateBoard()
     delegate?.updateBoard(board: board)
+  }
+  
+  func updateApple() {
+    apple.setRandomPosition()
+  }
+  
+  func isAppleCollected() -> Bool {
+    return snake.getHead() == apple
   }
   
   func updateBoard() {
