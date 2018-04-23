@@ -8,7 +8,7 @@ enum Direction {
 class Snake {
   var body = [Point]()
   var direction = Direction.south
-  var isAppleGained = false
+  var shouldGrow = false
   
   init (length:Int = Constants.snakeLength) {
     for i in 0..<length {
@@ -38,15 +38,6 @@ class Snake {
     body.append(Point(x: newHeadX, y: newHeadY))
   }
   
-  func isSelfCollision() -> Bool {
-    for i in body.indices.dropLast() {
-      if body[i] == body.last {
-        return true
-      }
-    }
-    return false
-  }
-  
   func isDirectionPossible(direction: Direction) -> Bool {
     if direction == Direction.north && self.direction == Direction.south {return false}
     if direction == Direction.south && self.direction == Direction.north {return false}
@@ -57,8 +48,8 @@ class Snake {
   }
   
   func removeTail() {
-    if isAppleGained {
-      isAppleGained = false
+    if shouldGrow {
+      shouldGrow = false
       return
     }
     body.removeFirst()

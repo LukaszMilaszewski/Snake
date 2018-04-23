@@ -19,6 +19,7 @@
 		8E1FE9EE208AA3BE00CEA259 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9ED208AA3BE00CEA259 /* Apple.swift */; };
 		8E1FE9F0208B600C00CEA259 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9EF208B600C00CEA259 /* GameHandler.swift */; };
 		8E1FE9F6208BA55C00CEA259 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */; };
+		8E1FE9F8208E505100CEA259 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F7208E505100CEA259 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8E1FE9ED208AA3BE00CEA259 /* Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apple.swift; sourceTree = "<group>"; };
 		8E1FE9EF208B600C00CEA259 /* GameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
 		8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		8E1FE9F7208E505100CEA259 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				8E1FE9ED208AA3BE00CEA259 /* Apple.swift */,
 				8E1FE9EF208B600C00CEA259 /* GameHandler.swift */,
 				8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */,
+				8E1FE9F7208E505100CEA259 /* Utils.swift */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				8E1FE9D4208A7E9900CEA259 /* GameViewController.swift in Sources */,
 				8E1FE9EE208AA3BE00CEA259 /* Apple.swift in Sources */,
 				8E1FE9E8208A7FE900CEA259 /* Snake.swift in Sources */,
+				8E1FE9F8208E505100CEA259 /* Utils.swift in Sources */,
 				8E1FE9F0208B600C00CEA259 /* GameHandler.swift in Sources */,
 				8E1FE9D2208A7E9900CEA259 /* AppDelegate.swift in Sources */,
 				8E1FE9E4208A7F2800CEA259 /* Point.swift in Sources */,

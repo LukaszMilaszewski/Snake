@@ -1,13 +1,31 @@
 import Foundation
 
 class Apple: Point {
-  let imagePath: String
+  var imagePath: String
+  var xMax: Int
+  var yMax: Int
   
-  init(boardWidth: Int, boardHeight: Int, imagePath: String = Constants.appleImagePath) {
-    let x = Int(arc4random_uniform(UInt32(boardWidth)))
-    let y = Int(arc4random_uniform(UInt32(boardHeight)))
+  init(xMax: Int, yMax: Int, imagePath: String = Constants.appleImagePath) {
+    self.xMax = xMax
+    self.yMax = yMax
     self.imagePath = imagePath
     
-    super.init(x: x, y: y)
+    let randomPoint = Utils.getRandomPoint(xMax: xMax, yMax: yMax)
+    super.init(x:randomPoint.x, y: randomPoint.y)
+  }
+  
+  func setPosition(point: Point) {
+    x = point.x
+    y = point.y
+  }
+  
+  func setRandomPosition() {
+    let point = Utils.getRandomPoint(xMax: xMax, yMax: yMax)
+    setPosition(point: point)
+  }
+  
+  func changeMaxes(xMax: Int, yMax: Int) {
+    self.xMax = xMax
+    self.yMax = yMax
   }
 }
