@@ -34,16 +34,7 @@ class GameHandler {
   
   func setTimer(speed: Speed) {
     
-    var timeInterval: Double
-    
-    switch speed {
-    case .slow:
-      timeInterval = 0.5
-    case .medium:
-      timeInterval = 0.2
-    case .fast:
-      timeInterval = 0.1
-    }
+    let timeInterval = speed.rawValue
     
     self.timer = Timer.scheduledTimer(timeInterval: timeInterval,
                                       target: self,
@@ -54,12 +45,12 @@ class GameHandler {
   
   func addSnake() {
     for point in snake.body {
-      board.setElement(x: point.x, y: point.y, value: 1)
+      board.setElement(x: point.x, y: point.y, item: Item.snake)
     }
   }
   
   func addApple() {
-    board.setElement(x: apple.x, y: apple.y, value: 5)
+    board.setElement(x: apple.x, y: apple.y, item: Item.apple)
   }
   
   func setSnakeDirection(direction: Direction) {

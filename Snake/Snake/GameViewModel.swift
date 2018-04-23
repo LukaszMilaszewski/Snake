@@ -54,11 +54,11 @@ class GameViewModel {
     layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
     
     switch value {
-    case 0:
+    case Item.nothing.rawValue:
       layer.fillColor = UIColor.white.cgColor
-    case 1:
+    case Item.snake.rawValue:
       layer.fillColor = UIColor.black.cgColor
-    case 5:
+    case Item.apple.rawValue:
       layer.fillColor = UIColor.red.cgColor
     default:
       print("cannot happen")

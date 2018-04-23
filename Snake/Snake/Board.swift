@@ -1,16 +1,19 @@
 class Board {
-  var  board: [[Int]]
-
-  init(width: Int, height: Int) {
-    board = [[Int]](repeating: [Int](repeating: 0, count: width), count: height)
+  var board: [[Int]]
+  var empty: Int
+  
+  init(width: Int, height: Int, emptyItem: Item = Item.nothing) {
+    empty = emptyItem.rawValue
+    board = [[Int]](repeating: [Int](repeating: empty, count: width), count: height)
     clearBoard()
   }
   
   func clearBoard() {
-    board = [[Int]](repeating: [Int](repeating: 0, count: getWidth()), count: getHeight())
+    board = [[Int]](repeating: [Int](repeating: empty, count: getWidth()), count: getHeight())
   }
   
-  func setElement(x: Int, y: Int, value: Int) {
+  func setElement(x: Int, y: Int, item: Item) {
+    let value = item.rawValue
     board[y][x] = value
   }
   
