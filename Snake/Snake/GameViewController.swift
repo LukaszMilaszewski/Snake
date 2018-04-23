@@ -8,7 +8,6 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
-    setupView()
     startGame()
   }
   
@@ -36,10 +35,13 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     }
   }
   
-  func setupView() {
+  func setupView(board: Board, snake: Snake, apple: Apple) {
     view.backgroundColor = UIColor.gray
     gameViewModel = GameViewModel(view: self.view,
-                                  color: Constants.backgroundColor)
+                                  color: Constants.backgroundColor,
+                                  board: board,
+                                  snake: snake,
+                                  apple: apple)
     gameViewModel?.delegate = self
   }
   
@@ -52,6 +54,8 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
                               snakeLength: Constants.snakeLength)
     
     gameHandler!.delegate = self
+    
+    setupView(board: (gameHandler?.board)!, snake: (gameHandler?.snake)!, apple: (gameHandler?.apple)!)
     gameHandler!.startGame()
   }
   
@@ -60,13 +64,14 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     gameViewModel?.showAlert()
   }
   
-  func updateBoard(board: Board) {
-    gameViewModel?.showView(board: board)
+  func updateBoard(snake: Snake, apple: Apple) {
+    gameViewModel?.showView(snake: snake, apple: apple)
   }
   
   //MARK: - GameViewModelDelegate
   func restartButtonPressed() {
-    self.viewDidLoad()
+    view.layer.sublayers?.removeAll()
+    startGame()
   }
 
   func presentAlert(alert: UIAlertController) {

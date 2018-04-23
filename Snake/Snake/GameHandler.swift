@@ -2,7 +2,7 @@ import Foundation
 
 protocol GameHandlerDelegate: class {
   func collision()
-  func updateBoard(board: Board)
+  func updateBoard(snake: Snake, apple: Apple)
 }
 
 class GameHandler {
@@ -29,7 +29,7 @@ class GameHandler {
   func setInitialBoard() {
     addSnake()
     addApple()
-    delegate?.updateBoard(board: board)
+    delegate?.updateBoard(snake: snake, apple: apple)
   }
   
   func setTimer(speed: Speed) {
@@ -86,7 +86,7 @@ class GameHandler {
     }
     
     updateBoard()
-    delegate?.updateBoard(board: board)
+    delegate?.updateBoard(snake: snake, apple: apple)
   }
   
   func updateApple() {

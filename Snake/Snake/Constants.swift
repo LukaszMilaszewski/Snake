@@ -9,5 +9,5 @@ class Constants {
   static let squareDimension = 20
   static let backgroundColor = UIColor.gray
   
-  static let initialGameSpeed = Speed.medium
+  static let initialGameSpeed = Speed.fast
 }
