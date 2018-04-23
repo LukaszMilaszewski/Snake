@@ -43,13 +43,13 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
   @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
     switch sender.direction {
     case UISwipeGestureRecognizerDirection.up:
-      gameHandler!.setSnakeDirection(direction: Direction.north)
+      gameHandler!.setSnakeDirection(direction: Direction.Up)
     case UISwipeGestureRecognizerDirection.down:
-      gameHandler!.setSnakeDirection(direction: Direction.south)
+      gameHandler!.setSnakeDirection(direction: Direction.Down)
     case UISwipeGestureRecognizerDirection.left:
-      gameHandler!.setSnakeDirection(direction: Direction.west)
+      gameHandler!.setSnakeDirection(direction: Direction.Left)
     case UISwipeGestureRecognizerDirection.right:
-      gameHandler!.setSnakeDirection(direction: Direction.east)
+      gameHandler!.setSnakeDirection(direction: Direction.Right)
     default:
       assert(false, "Cannot handle direction.")
     }

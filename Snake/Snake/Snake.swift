@@ -1,13 +1,13 @@
 enum Direction {
-  case north
-  case south
-  case east
-  case west
+  case Up
+  case Down
+  case Right
+  case Left
 }
 
 class Snake {
   var body = [Point]()
-  var direction = Direction.south
+  var direction = Direction.Down
   var shouldGrow = false
   
   init (length:Int = Constants.snakeLength) {
@@ -22,13 +22,13 @@ class Snake {
     var offsetY = 0
     
     switch direction {
-    case .north:
+    case .Up:
       offsetY = -1
-    case .east:
+    case .Right:
       offsetX = 1
-    case .south:
+    case .Down:
       offsetY = 1
-    case .west:
+    case .Left:
       offsetX = -1
     }
     
@@ -39,10 +39,10 @@ class Snake {
   }
   
   func isDirectionPossible(direction: Direction) -> Bool {
-    if direction == Direction.north && self.direction == Direction.south {return false}
-    if direction == Direction.south && self.direction == Direction.north {return false}
-    if direction == Direction.east && self.direction == Direction.west {return false}
-    if direction == Direction.west && self.direction == Direction.east {return false}
+    if direction == Direction.Up && self.direction == Direction.Down {return false}
+    if direction == Direction.Down && self.direction == Direction.Up {return false}
+    if direction == Direction.Right && self.direction == Direction.Left {return false}
+    if direction == Direction.Left && self.direction == Direction.Right {return false}
     
     return true
   }
