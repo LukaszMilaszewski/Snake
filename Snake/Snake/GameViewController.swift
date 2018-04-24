@@ -20,6 +20,7 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     }
   }
   
+  
   @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
     switch sender.direction {
     case UISwipeGestureRecognizerDirection.up:
@@ -35,17 +36,12 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     }
   }
   
-  func setupView(board: Board, snake: Snake, apple: Apple) {
-    view.backgroundColor = UIColor.gray
-    gameViewModel = GameViewModel(view: self.view,
-                                  color: Constants.backgroundColor,
-                                  board: board,
-                                  snake: snake,
-                                  apple: apple)
-    gameViewModel?.delegate = self
+  func startGame() {
+    setup()
+    run()
   }
   
-  func startGame() {
+  func setup() {
     let width = Int(Int(view.bounds.width) / Constants.squareDimension)
     let height = Int(Int(view.bounds.height) / Constants.squareDimension)
     
@@ -56,6 +52,19 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     gameHandler!.delegate = self
     
     setupView(board: (gameHandler?.board)!, snake: (gameHandler?.snake)!, apple: (gameHandler?.apple)!)
+  }
+  
+  func setupView(board: Board, snake: Snake, apple: Apple) {
+    view.backgroundColor = UIColor.gray
+    gameViewModel = GameViewModel(view: self.view,
+                                  color: Constants.backgroundColor,
+                                  board: board,
+                                  snake: snake,
+                                  apple: apple)
+    gameViewModel?.delegate = self
+  }
+  
+  func run() {
     gameHandler!.startGame()
   }
   
