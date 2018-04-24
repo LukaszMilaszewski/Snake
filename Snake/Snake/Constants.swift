@@ -10,4 +10,8 @@ class Constants {
   static let backgroundColor = UIColor.gray
   
   static let initialGameSpeed = Speed.fast
+  
+  static let boardLayerName = "BoardLayer"
+  static let snakeLayerName = "SnakeLayer"
+  static let appleLayerName = "AppleLayer"
 }

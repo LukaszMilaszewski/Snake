@@ -33,73 +33,97 @@ class GameViewModel {
     offsetX = (screenWidth - width * Constants.squareDimension) / 2
     offsetY = (screenHeight - height * Constants.squareDimension) / 2
     
-    createBoardView(board: board)
-    createSnakeView(snake: snake)
-    createAppleView(apple: apple)
+    boardLayer = createLayer(name: Constants.boardLayerName)
+    appleLayer = createLayer(name: Constants.appleLayerName)
+    snakeLayer = createLayer(name: Constants.snakeLayerName)
+    
+    addBoardLayer(board: board)
+    addSnakeLayer(snake: snake)
+    addAppleLayer(apple: apple)
   }
   
-  func createBoardView(board: Board) {
-    boardLayer = CAShapeLayer()
+  func createLayer(name: String) -> CAShapeLayer {
+    let layer = CAShapeLayer()
+    layer.name = name
+    
+    return layer
+  }
+  
+  func addBoardLayer(board: Board) {
     for i in 0..<board.board.count {
       for j in 0..<board.board[i].count {
-        let layer = getLayer(x: offsetX + j * Constants.squareDimension, y: offsetY + i * Constants.squareDimension)
-        layer.setColor(value: Item.nothing.rawValue)
+        let layer = createLayer(x: offsetX + j * Constants.squareDimension,
+                                y: offsetY + i * Constants.squareDimension,
+                                itemValue: Item.nothing.rawValue)
         boardLayer?.addSublayer(layer)
       }
     }
     view.layer.addSublayer(boardLayer!)
   }
   
-  func createAppleView(apple: Apple) {
-    let layer = getLayer(x: offsetX + apple.x * Constants.squareDimension, y: offsetY + apple.y * Constants.squareDimension)
-    layer.setColor(value: Item.apple.rawValue)
-    view.layer.addSublayer(layer)
-  }
-  
-  func createSnakeView(snake: Snake) {
-    snakeLayer = CAShapeLayer()
-    
+  func addSnakeLayer(snake: Snake) {
     for point in snake.body {
-      let layer = getLayer(x: offsetX + point.x * Constants.squareDimension,
-                           y: offsetY + point.y * Constants.squareDimension)
-      
-      layer.setColor(value: Item.snake.rawValue)
+      let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
+                              y: offsetY + point.y * Constants.squareDimension,
+                              itemValue: Item.snake.rawValue)
       snakeLayer?.addSublayer(layer)
     }
     view.layer.addSublayer(snakeLayer!)
   }
   
-  func updateApple(apple: Apple) {
-    let layer = getLayer(x: offsetX + apple.x * Constants.squareDimension, y: offsetY + apple.y * Constants.squareDimension)
-    layer.setColor(value: Item.apple.rawValue)
-    view.layer.sublayers![2] = layer
+  func addAppleLayer(apple: Apple) {
+    let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
+                            y: offsetY + apple.y * Constants.squareDimension,
+                            itemValue: Item.apple.rawValue)
+    appleLayer?.addSublayer(layer)
+    view.layer.addSublayer(appleLayer!)
   }
   
-  func showView(snake: Snake, apple: Apple) {
-    
-    let blabla = view.layer.sublayers![1]
-    if blabla.sublayers?.count == snake.body.count {
-      updateApple(apple: apple)
-    }
-    
-    let temp = CAShapeLayer()
-    for point in snake.body {
-      let layer = getLayer(x: offsetX + point.x * Constants.squareDimension,
-                           y: offsetY + point.y * Constants.squareDimension)
-      layer.setColor(value: Item.snake.rawValue)
-      temp.addSublayer(layer)
-    }
-    view.layer.sublayers![1] = temp
-    
-  }
-
-  
-  func getLayer(x: Int, y: Int) -> CAShapeLayer {
+  func createLayer(x: Int, y: Int, itemValue: Int) -> CAShapeLayer {
     let layer = CAShapeLayer()
     let element = CGRect(x: x, y: y, width: Constants.squareDimension, height: Constants.squareDimension)
     layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
-
+    layer.setColor(value: itemValue)
+    
     return layer
+  }
+  
+  func showView(snake: Snake, apple: Apple) {
+    let snakeLayerIndex = getLayerIndex(layerName: Constants.snakeLayerName)
+    let snakeLayer = view.layer.sublayers![snakeLayerIndex]
+   
+    if snakeLayer.sublayers?.count == snake.body.count {
+      updateApple(apple: apple)
+    }
+    
+    let newSnakeLayer = createLayer(name: Constants.snakeLayerName)
+    
+    for point in snake.body {
+      let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
+                              y: offsetY + point.y * Constants.squareDimension,
+                              itemValue: Item.snake.rawValue)
+      newSnakeLayer.addSublayer(layer)
+    }
+    view.layer.sublayers![snakeLayerIndex] = newSnakeLayer
+  }
+  
+  func getLayerIndex(layerName: String) -> Int {
+    for (index, layer) in view.layer.sublayers!.enumerated() {
+      if layer.name == layerName {
+        return index
+      }
+    }
+    //TODO: handle index out of bounds
+    return 10
+  }
+  
+  func updateApple(apple: Apple) {
+    let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
+                            y: offsetY + apple.y * Constants.squareDimension,
+                            itemValue: Item.apple.rawValue)
+    layer.name = Constants.appleLayerName
+    let appleLayerIndex = getLayerIndex(layerName: Constants.appleLayerName)
+    view.layer.sublayers![appleLayerIndex] = layer
   }
   
   func showAlert() {
@@ -108,7 +132,6 @@ class GameViewModel {
       self.delegate?.restartButtonPressed()
     }))
     delegate?.presentAlert(alert: alert)
-    
   }
 }
 
