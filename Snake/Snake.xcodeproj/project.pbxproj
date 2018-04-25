@@ -17,10 +17,10 @@
 		8E1FE9E8208A7FE900CEA259 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9E7208A7FE900CEA259 /* Snake.swift */; };
 		8E1FE9EA208A812200CEA259 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9E9208A812200CEA259 /* Constants.swift */; };
 		8E1FE9EE208AA3BE00CEA259 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9ED208AA3BE00CEA259 /* Apple.swift */; };
-		8E1FE9F0208B600C00CEA259 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9EF208B600C00CEA259 /* GameHandler.swift */; };
+		8E1FE9F0208B600C00CEA259 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9EF208B600C00CEA259 /* Game.swift */; };
 		8E1FE9F6208BA55C00CEA259 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */; };
 		8E1FE9F8208E505100CEA259 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F7208E505100CEA259 /* Utils.swift */; };
-		8E1FE9FA208E605900CEA259 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F9208E605900CEA259 /* Helpers.swift */; };
+		8E1FE9FA208E605900CEA259 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F9208E605900CEA259 /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +36,10 @@
 		8E1FE9E7208A7FE900CEA259 /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		8E1FE9E9208A812200CEA259 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E1FE9ED208AA3BE00CEA259 /* Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apple.swift; sourceTree = "<group>"; };
-		8E1FE9EF208B600C00CEA259 /* GameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
+		8E1FE9EF208B600C00CEA259 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		8E1FE9F7208E505100CEA259 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		8E1FE9F9208E605900CEA259 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		8E1FE9F9208E605900CEA259 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,23 +74,63 @@
 		8E1FE9D0208A7E9900CEA259 /* Snake */ = {
 			isa = PBXGroup;
 			children = (
-				8E1FE9D1208A7E9900CEA259 /* AppDelegate.swift */,
-				8E1FE9D3208A7E9900CEA259 /* GameViewController.swift */,
+				8E1FE9FF2091118000CEA259 /* Data */,
+				8E1FE9FE2091110900CEA259 /* Models */,
+				8E1FE9FD209110F100CEA259 /* ViewControllers */,
 				8E1FE9D5208A7E9900CEA259 /* Main.storyboard */,
 				8E1FE9D8208A7E9A00CEA259 /* Assets.xcassets */,
 				8E1FE9DA208A7E9A00CEA259 /* LaunchScreen.storyboard */,
 				8E1FE9DD208A7E9A00CEA259 /* Info.plist */,
+				8E1FE9E9208A812200CEA259 /* Constants.swift */,
+				8E1FE9F7208E505100CEA259 /* Utils.swift */,
+				8E1FE9F9208E605900CEA259 /* Enums.swift */,
+			);
+			path = Snake;
+			sourceTree = "<group>";
+		};
+		8E1FE9FD209110F100CEA259 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E1FEA002091118D00CEA259 /* GameViewController */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8E1FE9FE2091110900CEA259 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				8E1FE9E3208A7F2800CEA259 /* Point.swift */,
 				8E1FE9E5208A7FC300CEA259 /* Board.swift */,
 				8E1FE9E7208A7FE900CEA259 /* Snake.swift */,
-				8E1FE9E9208A812200CEA259 /* Constants.swift */,
 				8E1FE9ED208AA3BE00CEA259 /* Apple.swift */,
-				8E1FE9EF208B600C00CEA259 /* GameHandler.swift */,
-				8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */,
-				8E1FE9F7208E505100CEA259 /* Utils.swift */,
-				8E1FE9F9208E605900CEA259 /* Helpers.swift */,
+				8E1FE9EF208B600C00CEA259 /* Game.swift */,
 			);
-			path = Snake;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8E1FE9FF2091118000CEA259 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8E1FE9D1208A7E9900CEA259 /* AppDelegate.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8E1FEA002091118D00CEA259 /* GameViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8E1FEA01209111AE00CEA259 /* ViewModels */,
+				8E1FE9D3208A7E9900CEA259 /* GameViewController.swift */,
+			);
+			path = GameViewController;
+			sourceTree = "<group>";
+		};
+		8E1FEA01209111AE00CEA259 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,10 +208,10 @@
 				8E1FE9E6208A7FC300CEA259 /* Board.swift in Sources */,
 				8E1FE9D4208A7E9900CEA259 /* GameViewController.swift in Sources */,
 				8E1FE9EE208AA3BE00CEA259 /* Apple.swift in Sources */,
-				8E1FE9FA208E605900CEA259 /* Helpers.swift in Sources */,
+				8E1FE9FA208E605900CEA259 /* Enums.swift in Sources */,
 				8E1FE9E8208A7FE900CEA259 /* Snake.swift in Sources */,
 				8E1FE9F8208E505100CEA259 /* Utils.swift in Sources */,
-				8E1FE9F0208B600C00CEA259 /* GameHandler.swift in Sources */,
+				8E1FE9F0208B600C00CEA259 /* Game.swift in Sources */,
 				8E1FE9D2208A7E9900CEA259 /* AppDelegate.swift in Sources */,
 				8E1FE9E4208A7F2800CEA259 /* Point.swift in Sources */,
 				8E1FE9EA208A812200CEA259 /* Constants.swift in Sources */,

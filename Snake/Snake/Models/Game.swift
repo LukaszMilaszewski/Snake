@@ -1,11 +1,11 @@
 import Foundation
 
-protocol GameHandlerDelegate: class {
+protocol GameDelegate: class {
   func collision()
   func updateBoard(snake: Snake, apple: Apple)
 }
 
-class GameHandler {
+class Game {
   var snake: Snake
   var board: Board
   var apple: Apple
@@ -13,7 +13,7 @@ class GameHandler {
   var timer: Timer?
   var gameSpeed: Speed?
   
-  var delegate: GameHandlerDelegate?
+  var delegate: GameDelegate?
   
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
     board = Board(width: boardWidth, height: boardHeight)

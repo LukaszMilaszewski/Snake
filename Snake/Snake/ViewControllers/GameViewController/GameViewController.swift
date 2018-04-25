@@ -1,8 +1,8 @@
 import UIKit
 
-class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDelegate {
+class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate {
   
-  var gameHandler: GameHandler?
+  var gameHandler: Game?
   var gameViewModel: GameViewModel?
 
   override func viewDidLoad() {
@@ -19,7 +19,6 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
       self.view.addGestureRecognizer(gesture)
     }
   }
-  
   
   @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
     switch sender.direction {
@@ -45,7 +44,7 @@ class GameViewController: UIViewController, GameHandlerDelegate, GameViewModelDe
     let width = Int(Int(view.bounds.width) / Constants.squareDimension)
     let height = Int(Int(view.bounds.height) / Constants.squareDimension)
     
-    gameHandler = GameHandler(boardWidth: width,
+    gameHandler = Game(boardWidth: width,
                               boardHeight: height,
                               snakeLength: Constants.snakeLength)
     
