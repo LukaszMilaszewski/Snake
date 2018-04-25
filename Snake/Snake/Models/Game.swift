@@ -27,8 +27,6 @@ class Game {
   }
   
   func setInitialBoard() {
-    addSnake()
-    addApple()
     delegate?.updateBoard(snake: snake, apple: apple)
   }
   
@@ -41,16 +39,6 @@ class Game {
                                       selector: #selector(self.timerMethod(_:)),
                                       userInfo: nil,
                                       repeats: true)
-  }
-  
-  func addSnake() {
-    for point in snake.body {
-      board.setElement(x: point.x, y: point.y, item: Item.snake)
-    }
-  }
-  
-  func addApple() {
-    board.setElement(x: apple.x, y: apple.y, item: Item.apple)
   }
   
   func setSnakeDirection(direction: Direction) {
@@ -67,7 +55,7 @@ class Game {
     let x = snake.getHeadX()
     let y = snake.getHeadY()
     
-    return x < 0 || x >= board.getWidth() || y < 0 || y >= board.getHeight()
+    return x < 0 || x >= board.width || y < 0 || y >= board.height
   }
   
   @objc func timerMethod(_ timer:Timer) {
@@ -84,8 +72,7 @@ class Game {
       updateApple()
       snake.shouldGrow = true
     }
-    
-    updateBoard()
+
     delegate?.updateBoard(snake: snake, apple: apple)
   }
   
@@ -95,11 +82,5 @@ class Game {
   
   func isAppleCollected() -> Bool {
     return snake.getHead() == apple
-  }
-  
-  func updateBoard() {
-    board.clearBoard()
-    addApple()
-    addSnake()
   }
 }

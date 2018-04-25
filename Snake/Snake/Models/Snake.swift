@@ -1,5 +1,5 @@
 class Snake {
-  var body: [Point]
+  public private(set) var body: [Point]
   var direction: Direction
   var shouldGrow = false
   
@@ -10,6 +10,10 @@ class Snake {
     for i in 0..<length {
       body.append(Point(x: 0, y: i))
     }
+  }
+  
+  func getBodyLength() -> Int {
+    return body.count
   }
   
   func isDirectionPossible(direction: Direction) -> Bool {

@@ -6,17 +6,17 @@ protocol GameViewModelDelegate: class {
 }
 
 class GameViewModel {
-  var view: UIView
-  var color: UIColor
+  private var view: UIView
+  private var color: UIColor
   
-  var boardLayer: CAShapeLayer?
-  var snakeLayer: CAShapeLayer?
-  var appleLayer: CAShapeLayer?
+  private var boardLayer: CAShapeLayer?
+  private var snakeLayer: CAShapeLayer?
+  private var appleLayer: CAShapeLayer?
 
-  var width: Int
-  var height: Int
-  var offsetX: Int
-  var offsetY: Int
+  private var width: Int
+  private var height: Int
+  private var offsetX: Int
+  private var offsetY: Int
   
   var delegate: GameViewModelDelegate?
   
@@ -50,14 +50,9 @@ class GameViewModel {
   }
   
   func addBoardLayer(board: Board) {
-    for i in 0..<board.board.count {
-      for j in 0..<board.board[i].count {
-        let layer = createLayer(x: offsetX + j * Constants.squareDimension,
-                                y: offsetY + i * Constants.squareDimension,
-                                itemValue: Item.nothing.rawValue)
-        boardLayer?.addSublayer(layer)
-      }
-    }
+    boardLayer = createLayer(x: offsetX, y: offsetY, itemValue: Item.nothing.rawValue,
+                             width: board.width * Constants.squareDimension,
+                             height: board.height * Constants.squareDimension)
     view.layer.addSublayer(boardLayer!)
   }
   
@@ -79,9 +74,11 @@ class GameViewModel {
     view.layer.addSublayer(appleLayer!)
   }
   
-  func createLayer(x: Int, y: Int, itemValue: Int) -> CAShapeLayer {
+  func createLayer(x: Int, y: Int, itemValue: Int,
+                   width: Int = Constants.squareDimension,
+                   height: Int = Constants.squareDimension ) -> CAShapeLayer {
     let layer = CAShapeLayer()
-    let element = CGRect(x: x, y: y, width: Constants.squareDimension, height: Constants.squareDimension)
+    let element = CGRect(x: x, y: y, width: width, height: height)
     layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
     layer.setColor(value: itemValue)
     
@@ -92,7 +89,7 @@ class GameViewModel {
     let snakeLayerIndex = getLayerIndex(layerName: Constants.snakeLayerName)
     let snakeLayer = view.layer.sublayers![snakeLayerIndex]
    
-    if snakeLayer.sublayers?.count == snake.body.count {
+    if snakeLayer.sublayers?.count == snake.getBodyLength() {
       updateApple(apple: apple)
     }
     
