@@ -46,7 +46,8 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
     
     gameHandler = Game(boardWidth: width,
                               boardHeight: height,
-                              snakeLength: Constants.snakeLength)
+                              snakeLength: Constants.snakeLength
+      )
     
     gameHandler!.delegate = self
     

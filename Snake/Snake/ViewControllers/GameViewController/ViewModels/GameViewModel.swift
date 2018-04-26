@@ -53,7 +53,19 @@ class GameViewModel {
     boardLayer = createLayer(x: offsetX, y: offsetY, itemValue: Item.nothing.rawValue,
                              width: board.width * Constants.squareDimension,
                              height: board.height * Constants.squareDimension)
+
     view.layer.addSublayer(boardLayer!)
+  }
+  
+  private func scaleAnimation() -> CABasicAnimation {
+    let animation = CABasicAnimation(keyPath: "transform.scale")
+    animation.fromValue = 1
+    animation.toValue = 0.1
+    animation.duration = 1.0
+    animation.autoreverses = true
+    animation.repeatCount = .infinity
+    
+    return animation
   }
   
   func addSnakeLayer(snake: Snake) {
@@ -64,14 +76,22 @@ class GameViewModel {
       snakeLayer?.addSublayer(layer)
     }
     view.layer.addSublayer(snakeLayer!)
+    
   }
   
   func addAppleLayer(apple: Apple) {
+    
     let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
                             y: offsetY + apple.y * Constants.squareDimension,
                             itemValue: Item.apple.rawValue)
+    print(layer.preferredFrameSize())
+    print(layer.bounds)
+    print(layer.frame)
     appleLayer?.addSublayer(layer)
+    appleLayer?.add(scaleAnimation(), forKey: Constants.scaleAnimationKeyPath)
+    
     view.layer.addSublayer(appleLayer!)
+
   }
   
   func createLayer(x: Int, y: Int, itemValue: Int,
@@ -79,8 +99,10 @@ class GameViewModel {
                    height: Int = Constants.squareDimension ) -> CAShapeLayer {
     let layer = CAShapeLayer()
     let element = CGRect(x: x, y: y, width: width, height: height)
+
     layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
     layer.setColor(value: itemValue)
+
     
     return layer
   }
@@ -89,7 +111,7 @@ class GameViewModel {
     let snakeLayerIndex = getLayerIndex(layerName: Constants.snakeLayerName)
     let snakeLayer = view.layer.sublayers![snakeLayerIndex]
    
-    if snakeLayer.sublayers?.count == snake.getBodyLength() {
+    if snakeLayer.sublayers?.count != snake.getBodyLength() {
       updateApple(apple: apple)
     }
     
@@ -115,6 +137,7 @@ class GameViewModel {
   }
   
   func updateApple(apple: Apple) {
+    print("temp")
     let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
                             y: offsetY + apple.y * Constants.squareDimension,
                             itemValue: Item.apple.rawValue)

@@ -14,4 +14,5 @@ class Constants {
   static let boardLayerName = "BoardLayer"
   static let snakeLayerName = "SnakeLayer"
   static let appleLayerName = "AppleLayer"
+  static let scaleAnimationKeyPath = "scaleAnimation"
 }
