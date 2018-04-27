@@ -6,9 +6,9 @@ enum Direction {
 }
 
 enum Speed: Double {
-  case slow = 20
-  case medium = 21
-  case fast = 22
+  case slow = 0.6
+  case medium = 0.7
+  case fast = 0.2
 }
 
 enum Item: Int {
