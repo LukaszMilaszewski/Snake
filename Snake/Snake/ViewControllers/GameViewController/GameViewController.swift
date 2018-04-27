@@ -61,6 +61,9 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
                                   board: board,
                                   snake: snake,
                                   apple: apple)
+    print(self.view.bounds)
+    print(self.view.frame)
+    print("---")
     gameViewModel?.delegate = self
   }
   
