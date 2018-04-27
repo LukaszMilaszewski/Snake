@@ -9,10 +9,6 @@ class GameViewModel {
   private var view: UIView
   private var color: UIColor
   
-  private var boardLayer: CAShapeLayer?
-  private var snakeLayer: CAShapeLayer?
-  private var appleLayer: CAShapeLayer?
-
   private var width: Int
   private var height: Int
   private var offsetX: Int
@@ -33,94 +29,101 @@ class GameViewModel {
     offsetX = (screenWidth - width * Constants.squareDimension) / 2
     offsetY = (screenHeight - height * Constants.squareDimension) / 2
     
-    boardLayer = createLayer(name: Constants.boardLayerName)
-    appleLayer = createLayer(name: Constants.appleLayerName)
-    snakeLayer = createLayer(name: Constants.snakeLayerName)
-    
-    addBoardLayer(board: board)
-    addSnakeLayer(snake: snake)
+    addBoardLayer(width: board.width, height: board.height, name: Constants.boardLayerName)
+    addSnakeLayer(points: snake.body, name: Constants.snakeLayerName)
     addAppleLayer(apple: apple)
   }
   
-  func createLayer(name: String) -> CAShapeLayer {
-    let layer = CAShapeLayer()
-    layer.name = name
-    
-    return layer
+  func addBoardLayer(width: Int, height: Int, name: String) {
+    let boardLayer = createLayer(x: offsetX, y: offsetY, itemValue: Item.nothing.rawValue,
+                             width: width * Constants.squareDimension,
+                             height: height * Constants.squareDimension)
+    boardLayer.name = name
+    view.layer.addSublayer(boardLayer)
   }
   
-  func addBoardLayer(board: Board) {
-    boardLayer = createLayer(x: offsetX, y: offsetY, itemValue: Item.nothing.rawValue,
-                             width: board.width * Constants.squareDimension,
-                             height: board.height * Constants.squareDimension)
-
-    view.layer.addSublayer(boardLayer!)
-  }
-  
-  private func scaleAnimation() -> CABasicAnimation {
+  private func scaleAnimation(from: Double = 1.0, to: Double = 0.8, duration: Double = 0.8,
+                              repeatCount: Float = Float.infinity) -> CABasicAnimation {
     let animation = CABasicAnimation(keyPath: "transform.scale")
-    animation.fromValue = 1
-    animation.toValue = 0.1
-    animation.duration = 1.0
+    animation.fromValue = from
+    animation.toValue = to
+    animation.duration = duration
     animation.autoreverses = true
-    animation.repeatCount = .infinity
+    animation.repeatCount = repeatCount
     
     return animation
   }
   
-  func addSnakeLayer(snake: Snake) {
-    for point in snake.body {
+  func addSnakeLayer(points: [Point], name: String) {
+    let snakeLayer = CALayer()
+    snakeLayer.name = name
+    
+    for point in points {
       let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
                               y: offsetY + point.y * Constants.squareDimension,
                               itemValue: Item.snake.rawValue)
-      snakeLayer?.addSublayer(layer)
+      snakeLayer.addSublayer(layer)
     }
-    view.layer.addSublayer(snakeLayer!)
-    
+    view.layer.addSublayer(snakeLayer)
   }
   
   func addAppleLayer(apple: Apple) {
-    
+    let layer = createAppleLayer(apple: apple)
+    view.layer.addSublayer(layer)
+  }
+  
+  func createAppleLayer(apple: Apple) -> CALayer {
     let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
                             y: offsetY + apple.y * Constants.squareDimension,
                             itemValue: Item.apple.rawValue)
-    print(layer.preferredFrameSize())
-    print(layer.bounds)
-    print(layer.frame)
-    appleLayer?.addSublayer(layer)
-    appleLayer?.add(scaleAnimation(), forKey: Constants.scaleAnimationKeyPath)
-    
-    view.layer.addSublayer(appleLayer!)
-
-  }
-  
-  func createLayer(x: Int, y: Int, itemValue: Int,
-                   width: Int = Constants.squareDimension,
-                   height: Int = Constants.squareDimension ) -> CAShapeLayer {
-    let layer = CAShapeLayer()
-    let element = CGRect(x: x, y: y, width: width, height: height)
-
-    layer.path = UIBezierPath(roundedRect: element, cornerRadius: 4).cgPath
-    layer.setColor(value: itemValue)
-
+    layer.name = Constants.appleLayerName
+    layer.add(scaleAnimation(), forKey: Constants.scaleAnimationKeyPath)
     
     return layer
   }
   
-  func showView(snake: Snake, apple: Apple) {
+  func createLayer(x: Int, y: Int, itemValue: Int,
+                   width: Int = Constants.squareDimension,
+                   height: Int = Constants.squareDimension ) -> CALayer {
+    let layer = CALayer()
+    let layerRect = CGRect(x: x, y: y, width: width, height: height)
+    layer.frame = layerRect
+    layer.backgroundColor = getItemColor(value: itemValue)
+
+    return layer
+  }
+  
+  func getItemColor(value: Int) -> CGColor? {
+    switch value {
+    case Item.nothing.rawValue:
+      return UIColor.white.cgColor
+    case Item.snake.rawValue:
+      return UIColor.black.cgColor
+    case Item.apple.rawValue:
+      return UIColor.red.cgColor
+    default:
+      return nil
+    }
+  }
+  
+  func updateSnake(snake: Snake) {
     let snakeLayerIndex = getLayerIndex(layerName: Constants.snakeLayerName)
-    let snakeLayer = view.layer.sublayers![snakeLayerIndex]
-   
-    if snakeLayer.sublayers?.count != snake.getBodyLength() {
-      updateApple(apple: apple)
+    var animateSnake = false
+    
+    if snake.shouldGrow {
+      animateSnake = !animateSnake
     }
     
-    let newSnakeLayer = createLayer(name: Constants.snakeLayerName)
+    let newSnakeLayer = CALayer()
+    newSnakeLayer.name = Constants.snakeLayerName
     
-    for point in snake.body {
+    for point in snake.body.reversed() {
       let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
                               y: offsetY + point.y * Constants.squareDimension,
                               itemValue: Item.snake.rawValue)
+      if animateSnake {
+        layer.add(scaleAnimation(from: 1.0, to: 1.4, duration: 0.2, repeatCount: 1), forKey: Constants.scaleAnimationKeyPath)
+      }
       newSnakeLayer.addSublayer(layer)
     }
     view.layer.sublayers![snakeLayerIndex] = newSnakeLayer
@@ -137,11 +140,7 @@ class GameViewModel {
   }
   
   func updateApple(apple: Apple) {
-    print("temp")
-    let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
-                            y: offsetY + apple.y * Constants.squareDimension,
-                            itemValue: Item.apple.rawValue)
-    layer.name = Constants.appleLayerName
+    let layer = createAppleLayer(apple: apple)
     let appleLayerIndex = getLayerIndex(layerName: Constants.appleLayerName)
     view.layer.sublayers![appleLayerIndex] = layer
   }
@@ -152,20 +151,5 @@ class GameViewModel {
       self.delegate?.restartButtonPressed()
     }))
     delegate?.presentAlert(alert: alert)
-  }
-}
-
-extension CAShapeLayer {
-  func setColor(value: Int) {
-    switch value {
-    case Item.nothing.rawValue:
-      self.fillColor = UIColor.white.cgColor
-    case Item.snake.rawValue:
-      self.fillColor = UIColor.black.cgColor
-    case Item.apple.rawValue:
-      self.fillColor = UIColor.red.cgColor
-    default:
-    print("cannot happen")
-    }
   }
 }

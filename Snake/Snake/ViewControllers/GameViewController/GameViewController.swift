@@ -2,7 +2,7 @@ import UIKit
 
 class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate {
   
-  var gameHandler: Game?
+  var game: Game?
   var gameViewModel: GameViewModel?
 
   override func viewDidLoad() {
@@ -23,13 +23,13 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
     switch sender.direction {
     case UISwipeGestureRecognizerDirection.up:
-      gameHandler!.setSnakeDirection(direction: Direction.up)
+      game!.setSnakeDirection(direction: Direction.up)
     case UISwipeGestureRecognizerDirection.down:
-      gameHandler!.setSnakeDirection(direction: Direction.down)
+      game!.setSnakeDirection(direction: Direction.down)
     case UISwipeGestureRecognizerDirection.left:
-      gameHandler!.setSnakeDirection(direction: Direction.left)
+      game!.setSnakeDirection(direction: Direction.left)
     case UISwipeGestureRecognizerDirection.right:
-      gameHandler!.setSnakeDirection(direction: Direction.right)
+      game!.setSnakeDirection(direction: Direction.right)
     default:
       assert(false, "Cannot handle direction.")
     }
@@ -44,14 +44,14 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
     let width = Int(Int(view.bounds.width) / Constants.squareDimension)
     let height = Int(Int(view.bounds.height) / Constants.squareDimension)
     
-    gameHandler = Game(boardWidth: width,
+    game = Game(boardWidth: width,
                               boardHeight: height,
                               snakeLength: Constants.snakeLength
       )
     
-    gameHandler!.delegate = self
+    game!.delegate = self
     
-    setupView(board: (gameHandler?.board)!, snake: (gameHandler?.snake)!, apple: (gameHandler?.apple)!)
+    setupView(board: (game?.board)!, snake: (game?.snake)!, apple: (game?.apple)!)
   }
   
   func setupView(board: Board, snake: Snake, apple: Apple) {
@@ -65,16 +65,20 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   }
   
   func run() {
-    gameHandler!.startGame()
+    game!.startGame()
   }
   
-  //MARK: - GameHandlerDelegate
+  //MARK: - gameDelegate
   func collision() {
     gameViewModel?.showAlert()
   }
   
-  func updateBoard(snake: Snake, apple: Apple) {
-    gameViewModel?.showView(snake: snake, apple: apple)
+  func updateSnake(snake: Snake) {
+    gameViewModel?.updateSnake(snake: snake)
+  }
+  
+  func updateApple(apple: Apple) {
+    gameViewModel?.updateApple(apple: apple)
   }
   
   //MARK: - GameViewModelDelegate
