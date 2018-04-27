@@ -19,6 +19,7 @@
 		8E1FE9F6208BA55C00CEA259 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */; };
 		8E1FE9F8208E505100CEA259 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F7208E505100CEA259 /* Utils.swift */; };
 		8E1FE9FA208E605900CEA259 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1FE9F9208E605900CEA259 /* Enums.swift */; };
+		8EDF41932093767A00107937 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDF41922093767A00107937 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		8E1FE9F7208E505100CEA259 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8E1FE9F9208E605900CEA259 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		8EDF41922093767A00107937 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		8E1FE9FD209110F100CEA259 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8EDF41942093768300107937 /* MainViewController */,
 				8E1FEA002091118D00CEA259 /* GameViewController */,
 			);
 			path = ViewControllers;
@@ -125,6 +128,14 @@
 				8E1FE9F5208BA55C00CEA259 /* GameViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8EDF41942093768300107937 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EDF41922093767A00107937 /* MainViewController.swift */,
+			);
+			path = MainViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +210,7 @@
 				8E1FE9F6208BA55C00CEA259 /* GameViewModel.swift in Sources */,
 				8E1FE9E6208A7FC300CEA259 /* Board.swift in Sources */,
 				8E1FE9D4208A7E9900CEA259 /* GameViewController.swift in Sources */,
+				8EDF41932093767A00107937 /* MainViewController.swift in Sources */,
 				8E1FE9EE208AA3BE00CEA259 /* Apple.swift in Sources */,
 				8E1FE9FA208E605900CEA259 /* Enums.swift in Sources */,
 				8E1FE9E8208A7FE900CEA259 /* Snake.swift in Sources */,
