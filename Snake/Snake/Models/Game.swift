@@ -16,7 +16,7 @@ class Game {
   
   var delegate: GameDelegate?
   
-//  init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
+  init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
     board = Board(width: boardWidth, height: boardHeight)
     snake = Snake(length: snakeLength)
     apple = Apple(xMax: boardWidth, yMax: boardHeight)
