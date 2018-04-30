@@ -145,8 +145,8 @@ class GameViewModel {
     view.layer.sublayers![appleLayerIndex] = layer
   }
   
-  func showAlert() {
-    let alert = UIAlertController(title: "GAME OVER!", message: "Game Over.", preferredStyle: .alert)
+  func showAlert(score: Int) {
+    let alert = UIAlertController(title: "GAME OVER!", message: "Your score \(score).", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { _ in
       self.delegate?.restartButtonPressed()
     }))

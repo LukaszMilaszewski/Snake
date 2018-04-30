@@ -1,7 +1,7 @@
 import Foundation
 
 protocol GameDelegate: class {
-  func collision()
+  func collision(score: Int) 
   func updateSnake(snake: Snake)
   func updateApple(apple: Apple)
 }
@@ -14,6 +14,7 @@ class Game {
   var timer: Timer?
   var gameSpeed: Speed?
   
+  var score: Int = 0
   var delegate: GameDelegate?
   
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
@@ -65,12 +66,13 @@ class Game {
     
     if checkColision() {
       timer.invalidate()
-      delegate?.collision()
+      delegate?.collision(score: score)
 
       return
     }
     
     if isAppleCollected() {
+      score += 1
       updateApple()
       delegate?.updateApple(apple: apple)
       snake.shouldGrow = true

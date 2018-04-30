@@ -66,8 +66,8 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   }
   
   //MARK: - gameDelegate
-  func collision() {
-    gameViewModel?.showAlert()
+  func collision(score: Int) {
+    gameViewModel?.showAlert(score: score)
   }
   
   func updateSnake(snake: Snake) {
