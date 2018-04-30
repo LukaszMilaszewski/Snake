@@ -2,8 +2,8 @@ import UIKit
 
 class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate {
   
-  var game: Game?
-  var gameViewModel: GameViewModel?
+  private var game: Game?
+  private var gameViewModel: GameViewModel?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,9 +61,6 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
                                   board: board,
                                   snake: snake,
                                   apple: apple)
-    print(self.view.bounds)
-    print(self.view.frame)
-    print("---")
     gameViewModel?.delegate = self
   }
   
