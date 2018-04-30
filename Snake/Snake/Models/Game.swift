@@ -82,7 +82,18 @@ class Game {
   }
   
   func updateApple() {
-    apple.setRandomPosition()
+    var point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
+    while !isPointOnSnake(point: point) {
+      point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
+    }
+    apple.setPosition(point: point)
+  }
+  
+  func isPointOnSnake(point: Point) -> Bool {
+    for snakePoint in snake.body {
+      if snakePoint == point { return false }
+    }
+    return true
   }
   
   func isAppleCollected() -> Bool {
