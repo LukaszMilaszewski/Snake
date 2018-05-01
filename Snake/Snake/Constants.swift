@@ -6,7 +6,7 @@ class Constants {
   
   static let appleImagePath = #imageLiteral(resourceName: "apple")
   
-  static let squareDimension = 20
+  static let squareDimension = 30
   static let backgroundColor = UIColor.gray
   
   static let initialGameSpeed = Speed.fast

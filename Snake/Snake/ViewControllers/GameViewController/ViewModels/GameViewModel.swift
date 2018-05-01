@@ -87,8 +87,10 @@ class GameViewModel {
   
   func createLayer(x: Int, y: Int, itemValue: Int,
                    width: Int = Constants.squareDimension,
-                   height: Int = Constants.squareDimension ) -> CALayer {
+                   height: Int = Constants.squareDimension,
+                   cornerRadius: Int = Constants.squareDimension / 2) -> CALayer {
     let layer = CALayer()
+    layer.cornerRadius = CGFloat(cornerRadius)
     let layerRect = CGRect(x: x, y: y, width: width, height: height)
     layer.frame = layerRect
     layer.backgroundColor = getItemColor(value: itemValue)
