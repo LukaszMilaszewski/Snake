@@ -46,6 +46,11 @@ class Snake {
     return getHead().y
   }
   
+  func setHead(point: Point) {
+    body.last?.x = point.x
+    body.last?.y = point.y
+  }
+  
   func makeMove() {
     removeTail()
     addHead()
@@ -77,7 +82,6 @@ class Snake {
     
     let newHeadX = (previousHead?.x)! + offsetX
     let newHeadY = (previousHead?.y)! + offsetY
-    
     body.append(Point(x: newHeadX, y: newHeadY))
   }
 }

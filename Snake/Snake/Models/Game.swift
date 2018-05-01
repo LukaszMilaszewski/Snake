@@ -15,6 +15,8 @@ class Game {
   var gameSpeed: Speed?
   
   var score: Int = 0
+  var passWalls = true
+  
   var delegate: GameDelegate?
   
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
@@ -63,22 +65,45 @@ class Game {
   
   @objc func timerMethod(_ timer:Timer) {
     snake.makeMove()
-    
-    if checkColision() {
+
+    if !isMoveValid() {
       timer.invalidate()
       delegate?.collision(score: score)
-
+      
       return
     }
-    
-    if isAppleCollected() {
-      score += 1
-      updateApple()
-      delegate?.updateApple(apple: apple)
-      snake.shouldGrow = true
-    }
 
+    if isAppleCollected() {
+      appleCollected()
+    }
     delegate?.updateSnake(snake: snake)
+  }
+  
+  func isMoveValid() -> Bool {
+    if passWalls && isWallCollision() {
+      switch snake.direction {
+      case .down:
+        snake.setHead(point: Point(x: snake.getHeadX(), y: 0))
+      case .up:
+        snake.setHead(point: Point(x: snake.getHeadX(), y: board.height - 1))
+      case .right:
+        snake.setHead(point: Point(x: 0, y: snake.getHeadY()))
+      case .left:
+        snake.setHead(point: Point(x: board.width - 1, y: snake.getHeadY()))
+      }
+    } else {
+      if checkColision() {
+        return false
+      }
+    }
+    return true
+  }
+  
+  func appleCollected() {
+    score += 1
+    updateApple()
+    delegate?.updateApple(apple: apple)
+    snake.shouldGrow = true
   }
   
   func updateApple() {
