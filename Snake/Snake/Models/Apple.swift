@@ -1,14 +1,10 @@
-import UIKit
-
 class Apple: Point {
-  var image: UIImage
   var xMax: Int
   var yMax: Int
   
-  init(xMax: Int, yMax: Int, image: UIImage = Constants.appleImagePath) {
+  init(xMax: Int, yMax: Int) {
     self.xMax = xMax
     self.yMax = yMax
-    self.image = image
     
     let randomPoint = Utils.getRandomPoint(xMax: xMax, yMax: yMax)
     super.init(x:randomPoint.x, y: randomPoint.y)

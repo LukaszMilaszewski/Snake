@@ -5,7 +5,7 @@ class Snake {
   
   init (length:Int = Constants.snakeLength, initialDirection: Direction = Constants.snakeDirection) {
     direction = initialDirection
-    
+
     body = [Point]()
     for i in 0..<length {
       body.append(Point(x: 0, y: i))

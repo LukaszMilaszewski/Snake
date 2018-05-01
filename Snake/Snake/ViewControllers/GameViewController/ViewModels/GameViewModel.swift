@@ -62,6 +62,7 @@ class GameViewModel {
       let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
                               y: offsetY + point.y * Constants.squareDimension,
                               itemValue: Item.snake.rawValue)
+
       snakeLayer.addSublayer(layer)
     }
     view.layer.addSublayer(snakeLayer)
@@ -77,7 +78,7 @@ class GameViewModel {
                             y: offsetY + apple.y * Constants.squareDimension,
                             itemValue: Item.nothing.rawValue)
     layer.name = Constants.appleLayerName
-    layer.contents = apple.image.cgImage
+    layer.contents = Constants.appleImage.cgImage
     layer.contentsGravity = kCAGravityResize
     layer.masksToBounds = false
     layer.add(scaleAnimation(), forKey: Constants.scaleAnimationKeyPath)
@@ -93,22 +94,9 @@ class GameViewModel {
     layer.cornerRadius = CGFloat(cornerRadius)
     let layerRect = CGRect(x: x, y: y, width: width, height: height)
     layer.frame = layerRect
-    layer.backgroundColor = getItemColor(value: itemValue)
+    layer.backgroundColor = Utils.getItemColor(value: itemValue)
 
     return layer
-  }
-  
-  func getItemColor(value: Int) -> CGColor? {
-    switch value {
-    case Item.nothing.rawValue:
-      return UIColor.white.cgColor
-    case Item.snake.rawValue:
-      return UIColor.black.cgColor
-    case Item.apple.rawValue:
-      return UIColor.red.cgColor
-    default:
-      return nil
-    }
   }
   
   func updateSnake(snake: Snake) {
@@ -122,10 +110,27 @@ class GameViewModel {
     let newSnakeLayer = CALayer()
     newSnakeLayer.name = Constants.snakeLayerName
     
-    for point in snake.body.reversed() {
+    for (index, point) in snake.body.reversed().enumerated() {
       let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
                               y: offsetY + point.y * Constants.squareDimension,
                               itemValue: Item.snake.rawValue)
+      if index == 0 {
+        layer.backgroundColor = Utils.getItemColor(value: Item.nothing.rawValue)
+        var snakeHead = Constants.snakeHeadImage
+        switch snake.direction {
+        case .down:
+          break
+        case .up:
+          snakeHead = Utils.imageRotatedByDegrees(oldImage: snakeHead, deg: 180)
+        case .left:
+          snakeHead = Utils.imageRotatedByDegrees(oldImage: snakeHead, deg: 90)
+        case .right:
+          snakeHead = Utils.imageRotatedByDegrees(oldImage: snakeHead, deg: 270)
+        }
+        layer.contents = snakeHead.cgImage
+        
+      }
+      
       if animateSnake {
         layer.add(scaleAnimation(from: 1.0, to: 1.4, duration: 0.2, repeatCount: 1), forKey: Constants.scaleAnimationKeyPath)
       }
