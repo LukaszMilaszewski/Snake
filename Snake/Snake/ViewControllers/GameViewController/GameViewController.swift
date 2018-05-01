@@ -67,6 +67,14 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   
   //MARK: - gameDelegate
   func collision(score: Int) {
+    
+    let defaults = UserDefaults.standard
+    let bestScore = defaults.integer(forKey: "BestScore")
+    
+    if score > bestScore {
+      defaults.set(score, forKey: "BestScore")
+    }
+    
     gameViewModel?.showAlert(score: score)
   }
   
