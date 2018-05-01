@@ -75,10 +75,13 @@ class GameViewModel {
   func createAppleLayer(apple: Apple) -> CALayer {
     let layer = createLayer(x: offsetX + apple.x * Constants.squareDimension,
                             y: offsetY + apple.y * Constants.squareDimension,
-                            itemValue: Item.apple.rawValue)
+                            itemValue: Item.nothing.rawValue)
     layer.name = Constants.appleLayerName
+    layer.contents = apple.image.cgImage
+    layer.contentsGravity = kCAGravityResize
+    layer.masksToBounds = false
     layer.add(scaleAnimation(), forKey: Constants.scaleAnimationKeyPath)
-    
+
     return layer
   }
   

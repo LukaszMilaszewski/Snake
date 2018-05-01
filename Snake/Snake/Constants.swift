@@ -4,7 +4,7 @@ class Constants {
   static let snakeLength = 4
   static let snakeDirection = Direction.down
   
-  static let appleImagePath = ""
+  static let appleImagePath = #imageLiteral(resourceName: "apple")
   
   static let squareDimension = 20
   static let backgroundColor = UIColor.gray
