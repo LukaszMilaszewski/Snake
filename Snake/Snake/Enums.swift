@@ -9,4 +9,5 @@ enum Item: Int {
   case nothing = 0
   case snake = 1
   case apple = 2
+  case obstacle = 3
 }

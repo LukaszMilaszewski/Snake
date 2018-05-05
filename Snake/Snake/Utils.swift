@@ -32,6 +32,8 @@ class Utils {
       return UIColor(red: 249/255, green: 187/255, blue: 45/255, alpha: 1).cgColor
     case Item.apple.rawValue:
       return UIColor.red.cgColor
+    case Item.obstacle.rawValue:
+      return UIColor.black.cgColor
     default:
       return nil
     }

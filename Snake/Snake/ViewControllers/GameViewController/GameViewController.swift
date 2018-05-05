@@ -90,6 +90,10 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
     gameViewModel?.updateApple(apple: apple)
   }
   
+  func updateObstacles(obstacles: [Point]) {
+    gameViewModel?.updateObstacles(obstacles: obstacles)
+  }
+  
   //MARK: - GameViewModelDelegate
   func restartButtonPressed() {
     view.layer.sublayers?.removeAll()

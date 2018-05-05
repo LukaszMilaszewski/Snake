@@ -4,18 +4,19 @@ protocol GameDelegate: class {
   func collision(score: Int) 
   func updateSnake(snake: Snake)
   func updateApple(apple: Apple)
+  func updateObstacles(obstacles: [Point])
 }
 
 class Game {
   public private(set) var snake: Snake
   public private(set) var board: Board
   public private(set) var apple: Apple
+  private var obstacles = [Point]()
   
   private var timer: Timer?
   private var gameSpeed: Double?
   
   private var score = 0
-  private var shouldIncreaseSpeed = false
   
   private var gameOptions: GameOptions
   var delegate: GameDelegate?
@@ -56,7 +57,7 @@ class Game {
   }
   
   private func checkColision() -> Bool {
-    return snake.isSelfCollision() || isWallCollision()
+    return snake.isSelfCollision() || isWallCollision() || isObstacleCollision()
   }
   
   private func isWallCollision() -> Bool {
@@ -66,10 +67,21 @@ class Game {
     return x < 0 || x >= board.width || y < 0 || y >= board.height
   }
   
-  @objc func timerMethod(_ timer:Timer) {
-    if shouldIncreaseSpeed {
-      increaseSpeed()
+  private func isObstacleCollision() -> Bool {
+    if gameOptions.obstacles == false {
+      return false
     }
+    
+    for obstacle in obstacles {
+      if obstacle == snake.body {
+        return true
+      }
+    }
+    
+    return false
+  }
+  
+  @objc func timerMethod(_ timer:Timer) {
     snake.makeMove()
 
     if !isMoveValid() {
@@ -106,7 +118,6 @@ class Game {
   }
   
   private func increaseSpeed() {
-    shouldIncreaseSpeed = !shouldIncreaseSpeed
     gameSpeed! -= Constants.increaseSpeedStep
     
     if gameSpeed! <= 0.0 {
@@ -119,26 +130,35 @@ class Game {
     score += 1
     
     if score % Constants.scorePointsToIncreaseSpeed == 0  && gameOptions.increaseSpeed {
-      shouldIncreaseSpeed = !shouldIncreaseSpeed
+      increaseSpeed()
     }
+    
+    if score % Constants.scorePointsToAddObstacle == 0 && gameOptions.obstacles {
+      addObstacle()
+    }
+    
     updateApple()
     delegate?.updateApple(apple: apple)
     snake.shouldGrow = true
   }
   
+  func addObstacle() {
+    var randomPoint = Utils.getRandomPoint(xMax: board.width, yMax: board.height)
+    while randomPoint == snake.body || randomPoint == apple {
+      randomPoint = Utils.getRandomPoint(xMax: board.width, yMax: board.height)
+    }
+    obstacles.append(randomPoint)
+    
+    delegate?.updateObstacles(obstacles: obstacles)
+  }
+  
   private func updateApple() {
     var point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
-    while !isPointOnSnake(point: point) {
+    while point == snake.body || point == obstacles {
+      
       point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
     }
     apple.setPosition(point: point)
-  }
-  
-  private func isPointOnSnake(point: Point) -> Bool {
-    for snakePoint in snake.body {
-      if snakePoint == point { return false }
-    }
-    return true
   }
   
   private func isAppleCollected() -> Bool {

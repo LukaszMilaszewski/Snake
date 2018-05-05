@@ -160,7 +160,6 @@ class GameViewModel {
           snakeHead = Utils.imageRotatedByDegrees(oldImage: snakeHead, deg: 270)
         }
         layer.contents = snakeHead.cgImage
-        
       }
       
       if animateSnake {
@@ -168,23 +167,39 @@ class GameViewModel {
       }
       newSnakeLayer.addSublayer(layer)
     }
-    view.layer.sublayers![snakeLayerIndex] = newSnakeLayer
+    view.layer.sublayers![snakeLayerIndex!] = newSnakeLayer
   }
   
-  func getLayerIndex(layerName: String) -> Int {
+  func getLayerIndex(layerName: String) -> Int? {
     for (index, layer) in view.layer.sublayers!.enumerated() {
       if layer.name == layerName {
         return index
       }
     }
-    //TODO: handle index out of bounds
-    return 10
+    return nil
   }
   
   func updateApple(apple: Apple) {
     let layer = createAppleLayer(apple: apple)
     let appleLayerIndex = getLayerIndex(layerName: Constants.appleLayerName)
-    view.layer.sublayers![appleLayerIndex] = layer
+    view.layer.sublayers![appleLayerIndex!] = layer
+  }
+  
+  func updateObstacles(obstacles: [Point]) {
+    let obstaclesLayer = CALayer()
+    for point in obstacles {
+      let layer = createLayer(x: offsetX + point.x * Constants.squareDimension,
+                              y: offsetY + point.y * Constants.squareDimension,
+                              itemValue: Item.obstacle.rawValue)
+      obstaclesLayer.addSublayer(layer)
+    }
+    
+    if let obstaclesLayerIndex = getLayerIndex(layerName: Constants.obstaclesLayerName) {
+      view.layer.sublayers![obstaclesLayerIndex] = obstaclesLayer
+    } else {
+      obstaclesLayer.name = Constants.obstaclesLayerName
+      view.layer.addSublayer(obstaclesLayer)
+    }
   }
   
   func showAlert(score: Int) {

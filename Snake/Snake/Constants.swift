@@ -11,14 +11,17 @@ class Constants {
   static let backgroundColor = UIColor.gray
   static let gridWidth = 2.0
   
-  static let initialGameSpeed = 0.6
+  static let initialGameSpeed = 0.4
   static let increaseSpeedStep = 0.1
   static let scorePointsToIncreaseSpeed = 5
+  
+  static let scorePointsToAddObstacle = 2
   
   static let boardLayerName = "BoardLayer"
   static let snakeLayerName = "SnakeLayer"
   static let appleLayerName = "AppleLayer"
   static let gridLayerName = "GridLayer"
+  static let obstaclesLayerName = "ObstaclesLayer"
   
   static let scaleAnimationKeyPath = "scaleAnimation"
 }
