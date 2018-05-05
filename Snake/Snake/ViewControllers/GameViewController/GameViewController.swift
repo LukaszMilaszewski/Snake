@@ -99,9 +99,13 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
     view.layer.sublayers?.removeAll()
     startGame()
   }
+  
+  func backButtonPressed() {
+    dismiss(animated: true, completion: nil)
+  }
 
   func presentAlert(alert: UIAlertController) {
-    self.present(alert, animated: true)
+    present(alert, animated: true)
   }
 }
 

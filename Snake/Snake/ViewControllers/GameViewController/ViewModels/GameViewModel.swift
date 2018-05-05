@@ -2,6 +2,7 @@ import UIKit
 
 protocol GameViewModelDelegate: class {
   func restartButtonPressed()
+  func backButtonPressed()
   func presentAlert(alert: UIAlertController)
 }
 
@@ -206,6 +207,9 @@ class GameViewModel {
     let alert = UIAlertController(title: "GAME OVER!", message: "Your score \(score).", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Restart", style: .default, handler: { _ in
       self.delegate?.restartButtonPressed()
+    }))
+    alert.addAction(UIAlertAction(title: "Back to menu", style: .cancel, handler: { _ in
+      self.delegate?.backButtonPressed()
     }))
     delegate?.presentAlert(alert: alert)
   }
