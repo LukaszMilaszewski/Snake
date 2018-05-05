@@ -16,7 +16,7 @@ class GameViewModel {
   
   var delegate: GameViewModelDelegate?
   
-  init(view: UIView, color: UIColor, board: Board, snake: Snake, apple: Apple) {
+  init(view: UIView, color: UIColor, board: Board, snake: Snake, apple: Apple, showGrid: Bool) {
     self.view = view
     self.color = color
     view.backgroundColor = color
@@ -28,10 +28,42 @@ class GameViewModel {
     
     offsetX = (screenWidth - width * Constants.squareDimension) / 2
     offsetY = (screenHeight - height * Constants.squareDimension) / 2
-    
+  
     addBoardLayer(width: board.width, height: board.height, name: Constants.boardLayerName)
+    if showGrid {
+      addGridLayer()
+    }
     addSnakeLayer(points: snake.body, name: Constants.snakeLayerName)
     addAppleLayer(apple: apple)
+  }
+  
+  func addGridLayer() {
+    let layer = CAShapeLayer()
+    
+    let path = UIBezierPath()
+    path.lineWidth = CGFloat(Constants.gridWidth)
+    for index in 1..<width {
+      let start = CGPoint(x: index * Constants.squareDimension + offsetX, y: offsetY)
+      let end = CGPoint(x: index * Constants.squareDimension + offsetX,
+                        y: height * Constants.squareDimension + offsetY)
+      path.move(to: start)
+      path.addLine(to: end)
+    }
+    
+    for index in 1..<height {
+      let start = CGPoint(x: offsetX, y: index * Constants.squareDimension + offsetY)
+      let end = CGPoint(x: width * Constants.squareDimension + offsetX,
+                        y: index * Constants.squareDimension + offsetY)
+      path.move(to: start)
+      path.addLine(to: end)
+    }
+    path.close()
+    
+    layer.path = path.cgPath
+    layer.name = Constants.gridLayerName
+    layer.strokeColor = UIColor.black.cgColor
+    
+    view.layer.addSublayer(layer)
   }
   
   func addBoardLayer(width: Int, height: Int, name: String) {

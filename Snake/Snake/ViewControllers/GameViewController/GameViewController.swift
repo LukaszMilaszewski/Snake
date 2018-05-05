@@ -51,16 +51,18 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
                 gameOptions: gameOptions!)
 
     game!.delegate = self
-    setupView(board: (game?.board)!, snake: (game?.snake)!, apple: (game?.apple)!)
+    setupView(board: (game?.board)!, snake: (game?.snake)!, apple: (game?.apple)!,
+              showGrid: gameOptions!.grid)
   }
   
-  func setupView(board: Board, snake: Snake, apple: Apple) {
+  func setupView(board: Board, snake: Snake, apple: Apple, showGrid: Bool) {
     view.backgroundColor = UIColor.gray
     gameViewModel = GameViewModel(view: self.view,
                                   color: Constants.backgroundColor,
                                   board: board,
                                   snake: snake,
-                                  apple: apple)
+                                  apple: apple,
+                                  showGrid: showGrid)
     gameViewModel?.delegate = self
   }
   
@@ -70,7 +72,6 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   
   //MARK: - gameDelegate
   func collision(score: Int) {
-    
     let defaults = UserDefaults.standard
     let bestScore = defaults.integer(forKey: "BestScore")
     
