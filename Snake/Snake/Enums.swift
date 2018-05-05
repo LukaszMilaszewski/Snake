@@ -5,12 +5,6 @@ enum Direction {
   case left
 }
 
-enum Speed: Double {
-  case slow = 0.7
-  case medium = 0.5
-  case fast = 0.3
-}
-
 enum Item: Int {
   case nothing = 0
   case snake = 1

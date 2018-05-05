@@ -7,16 +7,17 @@ protocol GameDelegate: class {
 }
 
 class Game {
-  var snake: Snake
-  var board: Board
-  var apple: Apple
+  public private(set) var snake: Snake
+  public private(set) var board: Board
+  public private(set) var apple: Apple
   
-  var timer: Timer?
-  var gameSpeed: Speed?
+  private var timer: Timer?
+  private var gameSpeed: Double?
   
-  var score: Int = 0
+  private var score = 0
+  private var shouldIncreaseSpeed = false
   
-  var gameOptions: GameOptions
+  private var gameOptions: GameOptions
   var delegate: GameDelegate?
   
   init(boardWidth: Int, boardHeight: Int, snakeLength: Int, gameOptions: GameOptions) {
@@ -24,22 +25,22 @@ class Game {
     snake = Snake(length: snakeLength)
     apple = Apple(xMax: boardWidth, yMax: boardHeight)
     self.gameOptions = gameOptions
-    
   }
   
-  func startGame(gameSpeed: Speed = Constants.initialGameSpeed) {
+  func startGame(gameSpeed: Double = Constants.initialGameSpeed) {
+    self.gameSpeed = gameSpeed
     setInitialBoard()
     setTimer(speed: gameSpeed)
   }
   
-  func setInitialBoard() {
+  private func setInitialBoard() {
     delegate?.updateSnake(snake: snake)
     delegate?.updateApple(apple: apple)
   }
   
-  func setTimer(speed: Speed) {
-    
-    let timeInterval = speed.rawValue
+  private func setTimer(speed: Double) {
+    timer?.invalidate()
+    let timeInterval = speed
     
     self.timer = Timer.scheduledTimer(timeInterval: timeInterval,
                                       target: self,
@@ -54,11 +55,11 @@ class Game {
     }
   }
   
-  func checkColision() -> Bool {
+  private func checkColision() -> Bool {
     return snake.isSelfCollision() || isWallCollision()
   }
   
-  func isWallCollision() -> Bool {
+  private func isWallCollision() -> Bool {
     let x = snake.getHeadX()
     let y = snake.getHeadY()
     
@@ -66,6 +67,9 @@ class Game {
   }
   
   @objc func timerMethod(_ timer:Timer) {
+    if shouldIncreaseSpeed {
+      increaseSpeed()
+    }
     snake.makeMove()
 
     if !isMoveValid() {
@@ -81,7 +85,7 @@ class Game {
     delegate?.updateSnake(snake: snake)
   }
   
-  func isMoveValid() -> Bool {
+  private func isMoveValid() -> Bool {
     if gameOptions.passWalls && isWallCollision() {
       switch snake.direction {
       case .down:
@@ -101,14 +105,28 @@ class Game {
     return true
   }
   
-  func appleCollected() {
+  private func increaseSpeed() {
+    shouldIncreaseSpeed = !shouldIncreaseSpeed
+    gameSpeed! -= Constants.increaseSpeedStep
+    
+    if gameSpeed! <= 0.0 {
+      gameSpeed! = 0.1
+    }
+    setTimer(speed: gameSpeed!)
+  }
+  
+  private func appleCollected() {
     score += 1
+    
+    if score % Constants.scorePointsToIncreaseSpeed == 0  && gameOptions.increaseSpeed {
+      shouldIncreaseSpeed = !shouldIncreaseSpeed
+    }
     updateApple()
     delegate?.updateApple(apple: apple)
     snake.shouldGrow = true
   }
   
-  func updateApple() {
+  private func updateApple() {
     var point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
     while !isPointOnSnake(point: point) {
       point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
@@ -116,14 +134,14 @@ class Game {
     apple.setPosition(point: point)
   }
   
-  func isPointOnSnake(point: Point) -> Bool {
+  private func isPointOnSnake(point: Point) -> Bool {
     for snakePoint in snake.body {
       if snakePoint == point { return false }
     }
     return true
   }
   
-  func isAppleCollected() -> Bool {
+  private func isAppleCollected() -> Bool {
     return snake.getHead() == apple
   }
 }
