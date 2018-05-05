@@ -4,7 +4,8 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   
   var game: Game?
   var gameViewModel: GameViewModel?
-
+  var gameOptions: GameOptions?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     addSwipe()
@@ -43,10 +44,12 @@ class GameViewController: UIViewController, GameDelegate, GameViewModelDelegate 
   func setup() {
     let width = Int(Int(view.bounds.width) / Constants.squareDimension)
     let height = Int(Int(view.bounds.height) / Constants.squareDimension)
-    
+
     game = Game(boardWidth: width,
-                              boardHeight: height,
-                              snakeLength: Constants.snakeLength)
+                boardHeight: height,
+                snakeLength: Constants.snakeLength,
+                gameOptions: gameOptions!)
+
     game!.delegate = self
     setupView(board: (game?.board)!, snake: (game?.snake)!, apple: (game?.apple)!)
   }

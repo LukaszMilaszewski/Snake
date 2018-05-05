@@ -15,14 +15,16 @@ class Game {
   var gameSpeed: Speed?
   
   var score: Int = 0
-  var passWalls = true
   
+  var gameOptions: GameOptions
   var delegate: GameDelegate?
   
-  init(boardWidth: Int, boardHeight: Int, snakeLength: Int) {
+  init(boardWidth: Int, boardHeight: Int, snakeLength: Int, gameOptions: GameOptions) {
     board = Board(width: boardWidth, height: boardHeight)
     snake = Snake(length: snakeLength)
     apple = Apple(xMax: boardWidth, yMax: boardHeight)
+    self.gameOptions = gameOptions
+    
   }
   
   func startGame(gameSpeed: Speed = Constants.initialGameSpeed) {
@@ -80,7 +82,7 @@ class Game {
   }
   
   func isMoveValid() -> Bool {
-    if passWalls && isWallCollision() {
+    if gameOptions.passWalls && isWallCollision() {
       switch snake.direction {
       case .down:
         snake.setHead(point: Point(x: snake.getHeadX(), y: 0))
