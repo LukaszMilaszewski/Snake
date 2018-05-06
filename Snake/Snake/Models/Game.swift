@@ -155,7 +155,6 @@ class Game {
   private func updateApple() {
     var point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
     while point == snake.body || point == obstacles {
-      
       point = Utils.getRandomPoint(xMax: apple.xMax, yMax: apple.yMax)
     }
     apple.setPosition(point: point)

@@ -23,61 +23,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASS WALLS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOH-LE-CK0">
-                                <rect key="frame" x="64" y="173" width="150" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oUq-BO-kvM">
-                                <rect key="frame" x="262" y="167" width="51" height="31"/>
-                                <color key="backgroundColor" red="0.89803921568627454" green="0.94117647058823528" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="onTintColor" red="0.40243648146636224" green="0.61081391112162686" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kIj-8W-9kb">
-                                <rect key="frame" x="262" y="238" width="51" height="31"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="onTintColor" red="0.4024364815" green="0.61081391110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lJf-JP-06h">
-                                <rect key="frame" x="262" y="309" width="51" height="31"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="onTintColor" red="0.4024364815" green="0.61081391110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCREASE SPEED:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZyH-3g-gtk">
-                                <rect key="frame" x="64" y="244" width="150" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isJ-0J-7OO">
-                                <rect key="frame" x="64" y="315" width="150" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OBSTACLE:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shD-3j-pnu">
-                                <rect key="frame" x="64" y="386" width="150" height="18"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LL2-gO-u5F">
-                                <rect key="frame" x="262" y="380" width="51" height="31"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="onTintColor" red="0.4024364815" green="0.61081391110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00h-0P-3is">
-                                <rect key="frame" x="64" y="496" width="247" height="52"/>
+                                <rect key="frame" x="41" y="495" width="291" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="VvO-3B-sme"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="START GAME">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,36 +38,108 @@
                                     <action selector="startGame" destination="aEM-YO-Une" eventType="touchUpInside" id="0Ey-H1-6XY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASS WALLS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOH-LE-CK0">
+                                <rect key="frame" x="41" y="149" width="165" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oUq-BO-kvM">
+                                <rect key="frame" x="285" y="143" width="51" height="31"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.94117647058823528" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="onTintColor" red="0.40243648146636224" green="0.61081391112162686" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kIj-8W-9kb">
+                                <rect key="frame" x="285" y="214" width="51" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="onTintColor" red="0.4024364815" green="0.61081391110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lJf-JP-06h">
+                                <rect key="frame" x="285" y="285" width="51" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="onTintColor" red="0.4024364815" green="0.61081391110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCREASE SPEED:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZyH-3g-gtk">
+                                <rect key="frame" x="41" y="220" width="133.5" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isJ-0J-7OO">
+                                <rect key="frame" x="41" y="291" width="150" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OBSTACLES:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shD-3j-pnu">
+                                <rect key="frame" x="41" y="362" width="149.5" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LL2-gO-u5F">
+                                <rect key="frame" x="285" y="356" width="51" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="onTintColor" red="0.4024364815" green="0.61081391110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEST SCORE: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mae-Tt-osv">
+                                <rect key="frame" x="41" y="431" width="113" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdu-Og-hQN">
+                                <rect key="frame" x="246" y="425" width="88" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="leG-gU-oBv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="RESET">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetScore" destination="aEM-YO-Une" eventType="touchUpInside" id="43X-nk-8w0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.8998391309416649" green="0.94299001217476597" blue="0.99942404029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yOH-LE-CK0" firstAttribute="top" secondItem="odj-qc-ZEI" secondAttribute="bottom" constant="85" id="1cN-SU-Fhb"/>
-                            <constraint firstItem="LL2-gO-u5F" firstAttribute="leading" secondItem="00h-0P-3is" secondAttribute="trailing" constant="-49" id="7ru-bD-3HN"/>
-                            <constraint firstItem="LL2-gO-u5F" firstAttribute="leading" secondItem="shD-3j-pnu" secondAttribute="trailing" constant="48.5" id="9R3-SN-EuA"/>
-                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="lJf-JP-06h" secondAttribute="trailing" constant="64" id="CBU-Fq-pqx"/>
+                            <constraint firstItem="yOH-LE-CK0" firstAttribute="top" secondItem="odj-qc-ZEI" secondAttribute="bottom" constant="61" id="1cN-SU-Fhb"/>
+                            <constraint firstItem="LL2-gO-u5F" firstAttribute="leading" secondItem="00h-0P-3is" secondAttribute="trailing" constant="-47" id="7ru-bD-3HN"/>
+                            <constraint firstItem="LL2-gO-u5F" firstAttribute="leading" secondItem="shD-3j-pnu" secondAttribute="trailing" constant="94.5" id="9R3-SN-EuA"/>
+                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="lJf-JP-06h" secondAttribute="trailing" constant="41" id="CBU-Fq-pqx"/>
                             <constraint firstItem="odj-qc-ZEI" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="86" id="Djp-UB-a2W"/>
-                            <constraint firstItem="yOH-LE-CK0" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="64" id="HXF-EJ-aIR"/>
-                            <constraint firstItem="lJf-JP-06h" firstAttribute="leading" secondItem="isJ-0J-7OO" secondAttribute="trailing" constant="48.5" id="IXJ-ja-uk6"/>
-                            <constraint firstItem="kIj-8W-9kb" firstAttribute="leading" secondItem="ZyH-3g-gtk" secondAttribute="trailing" constant="48.5" id="JTu-4i-mT0"/>
-                            <constraint firstItem="shD-3j-pnu" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="64" id="Jj5-QQ-UjA"/>
+                            <constraint firstItem="jdu-Og-hQN" firstAttribute="top" secondItem="LL2-gO-u5F" secondAttribute="bottom" constant="38" id="HFJ-Gq-LAR"/>
+                            <constraint firstItem="yOH-LE-CK0" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="41" id="HXF-EJ-aIR"/>
+                            <constraint firstItem="00h-0P-3is" firstAttribute="top" secondItem="jdu-Og-hQN" secondAttribute="bottom" constant="40" id="IBt-ga-VUP"/>
+                            <constraint firstItem="lJf-JP-06h" firstAttribute="leading" secondItem="isJ-0J-7OO" secondAttribute="trailing" constant="94" id="IXJ-ja-uk6"/>
+                            <constraint firstItem="shD-3j-pnu" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="41" id="Jj5-QQ-UjA"/>
                             <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="odj-qc-ZEI" secondAttribute="trailing" constant="86" id="MNX-vE-3Q1"/>
-                            <constraint firstItem="00h-0P-3is" firstAttribute="top" secondItem="LL2-gO-u5F" secondAttribute="bottom" constant="85" id="Ohu-qd-Lx3"/>
-                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="LL2-gO-u5F" secondAttribute="trailing" constant="64" id="QW9-99-D7q"/>
-                            <constraint firstItem="ZyH-3g-gtk" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="64" id="TFg-5T-7re"/>
+                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="LL2-gO-u5F" secondAttribute="trailing" constant="41" id="QW9-99-D7q"/>
+                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="jdu-Og-hQN" secondAttribute="trailing" constant="41" id="SFi-cZ-rzg"/>
+                            <constraint firstItem="ZyH-3g-gtk" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="41" id="TFg-5T-7re"/>
                             <constraint firstItem="LL2-gO-u5F" firstAttribute="top" secondItem="lJf-JP-06h" secondAttribute="bottom" constant="40" id="TxX-lB-Udd"/>
                             <constraint firstItem="ZyH-3g-gtk" firstAttribute="top" secondItem="oUq-BO-kvM" secondAttribute="bottom" constant="46" id="VPJ-rG-GWz"/>
-                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="00h-0P-3is" secondAttribute="trailing" constant="64" id="VyO-PO-6Pl"/>
-                            <constraint firstItem="00h-0P-3is" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="64" id="cAo-IX-jH6"/>
-                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="oUq-BO-kvM" secondAttribute="trailing" constant="64" id="ffZ-fY-fvC"/>
+                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="00h-0P-3is" secondAttribute="trailing" constant="43" id="VyO-PO-6Pl"/>
+                            <constraint firstItem="00h-0P-3is" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="41" id="cAo-IX-jH6"/>
+                            <constraint firstItem="Mae-Tt-osv" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="41" id="cTs-VU-oyc"/>
+                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="oUq-BO-kvM" secondAttribute="trailing" constant="41" id="ffZ-fY-fvC"/>
                             <constraint firstItem="kIj-8W-9kb" firstAttribute="top" secondItem="oUq-BO-kvM" secondAttribute="bottom" constant="40" id="fqS-mo-5jW"/>
-                            <constraint firstItem="isJ-0J-7OO" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="64" id="g3m-p1-hY7"/>
+                            <constraint firstItem="isJ-0J-7OO" firstAttribute="leading" secondItem="axO-JX-5Jx" secondAttribute="leading" constant="41" id="g3m-p1-hY7"/>
+                            <constraint firstItem="Mae-Tt-osv" firstAttribute="top" secondItem="LL2-gO-u5F" secondAttribute="bottom" constant="44" id="j71-It-XJk"/>
                             <constraint firstItem="odj-qc-ZEI" firstAttribute="top" secondItem="axO-JX-5Jx" secondAttribute="top" constant="32" id="lTi-XE-yQ6"/>
                             <constraint firstItem="lJf-JP-06h" firstAttribute="top" secondItem="kIj-8W-9kb" secondAttribute="bottom" constant="40" id="m5R-Eb-Fgc"/>
-                            <constraint firstItem="oUq-BO-kvM" firstAttribute="leading" secondItem="yOH-LE-CK0" secondAttribute="trailing" constant="48" id="qf6-CJ-RmR"/>
+                            <constraint firstItem="oUq-BO-kvM" firstAttribute="leading" secondItem="yOH-LE-CK0" secondAttribute="trailing" constant="79" id="qf6-CJ-RmR"/>
                             <constraint firstItem="isJ-0J-7OO" firstAttribute="top" secondItem="kIj-8W-9kb" secondAttribute="bottom" constant="46" id="rTQ-xX-GPh"/>
-                            <constraint firstItem="oUq-BO-kvM" firstAttribute="top" secondItem="odj-qc-ZEI" secondAttribute="bottom" constant="79" id="sMX-11-PI3"/>
+                            <constraint firstItem="oUq-BO-kvM" firstAttribute="top" secondItem="odj-qc-ZEI" secondAttribute="bottom" constant="55" id="sMX-11-PI3"/>
                             <constraint firstItem="odj-qc-ZEI" firstAttribute="centerX" secondItem="axO-JX-5Jx" secondAttribute="centerX" id="v2N-Wi-V7S"/>
-                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="kIj-8W-9kb" secondAttribute="trailing" constant="64" id="vPE-6p-CTc"/>
+                            <constraint firstItem="axO-JX-5Jx" firstAttribute="trailing" secondItem="kIj-8W-9kb" secondAttribute="trailing" constant="41" id="vPE-6p-CTc"/>
                             <constraint firstItem="shD-3j-pnu" firstAttribute="top" secondItem="lJf-JP-06h" secondAttribute="bottom" constant="46" id="wOT-B7-MAZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="axO-JX-5Jx"/>
@@ -123,6 +147,7 @@
                     <connections>
                         <outlet property="gridSwitch" destination="lJf-JP-06h" id="3R2-Lx-ahf"/>
                         <outlet property="obstaclesSwitch" destination="LL2-gO-u5F" id="lCq-M3-h5G"/>
+                        <outlet property="scoreLabel" destination="Mae-Tt-osv" id="LWM-Qa-ssa"/>
                         <outlet property="speedSwitch" destination="kIj-8W-9kb" id="Qmp-1b-Zar"/>
                         <outlet property="wallsSwitch" destination="oUq-BO-kvM" id="eaN-H9-i2v"/>
                     </connections>
