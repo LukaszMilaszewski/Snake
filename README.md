@@ -1,7 +1,9 @@
 # Snake
 ----
 
-![alt-text-1](images/preview.gif)
+<p align="center"> 
+<img src="images/preview.gif" width="250px" height="445px">
+</p>
 
 # Description
 ----
